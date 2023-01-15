@@ -1,0 +1,186 @@
+
+/*--------MOBILE ITERATION-----------------------------------------------------------*/
+
+@media screen and (max-width: 480px){
+    html{
+        font-family: 'Comic Neue';
+        font-size: 20px;
+    }
+    body{
+        margin: 0;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    header{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; 
+        margin-top: 10%;   
+    }
+    #heading{
+        width:100vw;
+        margin:2%;   
+    }
+    #sub-heading{
+        width:70%
+    }
+    #P-INTRO{    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #intro-penguin{
+        margin-top: 20%;
+    }
+    .story{
+        border-style:solid;
+        border-color: black;
+        border-width: 15px;
+        height:100vh;
+        width:100vw;
+        margin-left:2%;
+        margin-right:2%;
+        background-color: lightblue;    
+    }
+    .img-div{
+        margin-top: 10%;   
+        width:90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+    }
+    .intro-img-div{
+        margin-top: -10%;
+    }
+    .penguin{
+        height:150px;
+        width:250px;
+        border-radius: 10%;
+    }
+    .div-style{
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+    .text-div{
+   
+    }
+    ol{
+        margin-right:5%
+    }
+    .story-text{
+        margin-top: -10%;
+       
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+    h2{
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    li{
+        font-size: 0.6rem;
+        list-style:circle;
+    }
+    .button-div{
+        width:100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: -10%;
+    }
+    .btn-style{
+        border-radius: 15%;
+        padding:10px;
+        width:15%;
+        background-color: rgb(82, 193, 231);
+        font-size: 0.4rem;
+    }
+    #P-1btn{
+        border-radius: 15%;
+        padding:10px;
+        width:20%;
+        background-color: rgb(82, 193, 231);
+        margin-top: 10%;
+    }
+    strong{
+        height:50px;
+        background-color: rgb(82, 193, 231);;
+        width:60%;
+        border-style: solid;
+        border-color: black;
+        border-radius: 10%;
+        font-size: 1rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .bullet-points{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .points-div{
+        margin-top:5%;
+        margin-bottom:20%;
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;   
+    }
+    #div-puzzle1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70%;
+        background-color: white;
+        border-radius: 10%;
+        margin-top:5%;
+        
+
+    }
+    .quiz-p{
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin:5%;
+    }
+    .quiz-input{
+        width:50%;
+        border-radius:10%;
+        margin-bottom:5%;
+    }
+    span{
+        font-size: 0.8rem;
+    }
+    strong{
+        font-size: 0.8rem;
+    }
+}
+
+
+/*--------LOW RESOLUTION TABLETS & IPADS-----------------------------------------------------*/
+
+@media only screen and (min-width: 481px) and (max-width:767px){
+    
+}
+
+
+
+
+
+
+
+/*--------TABLET IPADS POTRAIT MODE---------------------------------------------------*/
+
+@media only screen and (min-width: 768px) and (max-width:1024px){}
+
+
+
+
