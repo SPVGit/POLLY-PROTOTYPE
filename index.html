@@ -87,7 +87,7 @@
                         <li>Their parents had left them weeks ago to fend for themselves.</li>
                         <li>It was time to head North.</li>
                         <li>Unfortunately, Polly was a bit late to join them and was left behind! :(</li>
-                        <li>In their rush to head North, the other penguins also failed to notice that Polly was not amongst them!</li>
+                        <li>In their rush, the other penguins also failed to notice that Polly was missing!</li>
                         <li>Should Polly stay behind, A: head North to catch up with the other penguins, or B: head South in search of new adventure?</li>
                     </ol>
                 </p>
@@ -129,11 +129,11 @@
                 <p id="rules-bulletpoints" class="bullet-points">
                     <ol>
                         <li>Polly decided to follow the footsteps of the others</li>
-                        <li>After a while, she looked around and found that the footsteps of her friends couldn't be seen anymore</li>
+                        <li>After a while, she looked around and found that the footsteps of her friends had vanished</li>
                         <li>There had been a blizzard overnight which had covered their tracks.</li>
-                        <li>Polly scratched her head, wondering what to do next</li>
+                        <li>Polly wondered what to do next</li>
                         <li>Should she head back to where she started from, A: continue to head north to catch up with her friends, B: choose a random direction, or C:
-                            head towards a dark object in the distance to her west</li>
+                            head towards a dark object in the distance to her west.</li>
                     </ol>
                 </p>
 
@@ -215,11 +215,11 @@
             <div id="div-puzzle1">
 
                 <p class="quiz-p">What is the name of the largest species of penguins on Earth?</p>
-                <input id="input1" class="quiz-input" placeholder="Type your answer here"></input>
+                <input id="input1"type="text" class="quiz-input" placeholder="Type your answer here"></input>
                 <p class="quiz-p">Where are these penguins found?</p>
-                <input id="input2" class="quiz-input" placeholder="Type your answer here"></input>
+                <input id="input2" type="text" class="quiz-input" placeholder="Type your answer here"></input>
                 <p class="quiz-p">How do penguins keep warm? They:</p>
-                <input id="input3" class="quiz-input" placeholder="Type your answer here"></input>
+                <input id="input3" type="text" class="quiz-input" placeholder="Type your answer here"></input>
                 
             </div>
             
@@ -304,14 +304,32 @@
         <!---------------------------------------------PAGE 6--------------------------------------------------------------->
 
         <div id = "P-6" class = "story div-style">
-       
-            
-           
-            <div class="button-div canvas-div">
+
+            <div id="cnv-and-btn-div">
+
+                <div id="canvas-win"><p>YOU MADE IT!!! Do you still want Polly to go back the way she came?
+                    Or A: continue on in search of her friends, or B: roam around aimlessly?
+                </p></div>
+
+                <div id="canvas-intro"><p>Click 'Begin' to help Polly swim past dangerous predators and activate the next stage of the adventure! <br>If you reach the finishing line you get 20 points. <br>Otherwise, you get negative points and you lose the game.</p></div>
+
+                <canvas id="my-canvas" width="340" height="350"></canvas>
+
+                <div id="canvas-btns">
+
+                    <button id="start-button" class="btn-style btn-cnv">Swim</button>
+                    <button id="game-click" class="btn-style btn-cnv">Click</button>
+                    <button id="restart-btn" class="btn-style btn-cnv">Restart Swim</button>
+
+                </div>
+
+            </div>
+
+            <div id="cnv-pg-btns" class="button-div canvas-div">
                 
                 <button class="btn-style P-5">Back</button>
-                <button class="btn-style P-7">A</button>
-                <button class="btn-style">B</button>
+                <button id="hiddenBtnP6A"class="btn-style P-7 hidden-btn">A</button>
+                <button id="hiddenBtnP6B"class="btn-style hidden-btn">B</button>
                 <button class="btn-style P-INTRO">Restart</button>
     
             </div>
@@ -346,10 +364,11 @@
                 <p id="rules-bulletpoints" class="bullet-points">
                     <ol>
 
-                        <li>"Phew!", thought Polly. That was a close call! She was nearly eaten up by those massive killer whales!</li>
-                        <li>The river carried her out of the underground system and out into daylight and to her delight, she spotted her friends in the distance. She crawled out of the river onto the icy bank and began to waddle towards her friends in the distance.But there was one more hurdle to overcome. </li>
+                        <li>"Phew!", thought Polly. That was a close call! She was lucky to be alive!</li>
+
+                        <li>The river carried her out of the underground system and into daylight. To her delight, she spotted her friends in the distance. She crawled out onto the icy bank and began to waddle towards her friends in the distance.But there was one more hurdle to overcome. </li>
                         
-                        <li>Has Polly had enough for the day? Should she head back and try again another time, or A: should she go ahead and face the next hurdle?</li>
+                        <li>Has Polly had enough for the day? Should she head back and try a different rouute, or A: should she go ahead and face the next hurdle?</li>
     
                     </ol>
                 </p>   
@@ -561,14 +580,59 @@
         <div id class = "story"></div>
         <div id class = "story"></div>
         <div id class = "story"></div>
-        <div id class = "story"></div>
-        <div id class = "story"></div>
         
-  
-    
-    
 
+        <div id="P-LOSE" class = "story">
+
+            <div class="points-div">
+
+                <strong>Points:
+
+                    <span>0</span>
+
+                </strong>
+
+            </div>
+
+            <div class="img-div">
+
+                <img id="sad-face" class="penguin" src="./IMAGES/100. sad-face-transparent-background-25.png">
+                
+            </div>
+
+            <div class="story-text">
+            
+                <p id="rules-bulletpoints" class="bullet-points">
+
+                    <ol>
+
+                        <li>Unfortunately, you have lost the game. </li>
+                        
+                        <li>Click on 'Restart' to go back to the beginning, or 'New Games' if you want to go a different adventure!</li>
+                        
+    
+                    </ol>
+
+                </p>   
+                
+            </div>
+
+            <div class="button-div">
+                
+                <button class="btn-style P-INTRO">Restart</button>
+                <button class="btn-style new-game">New Game</button>
+                
+            
+            </div>
+
+        </div>
+        
+        <div id="P-NEW" class = "story"></div>
+    
+    
+   
     <script src="./JAVASCRIPT/penguin.js"></script>
+    <script src="./JAVASCRIPT/canvas.js"></script>
 </body>
 </html>
 

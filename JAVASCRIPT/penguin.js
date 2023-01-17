@@ -1,19 +1,14 @@
 
 //INITIALIZE CODE------------------------------------------------------------------------------
-
-let backgroundAudio = new Audio('PRICE-OF-FREEDOM.mp3')
-
-function playAudio() {
-    backgroundAudio.play();
-  }
-
-function stopAudio(){
-    backgroundAudio.pause();
-    backgroundAudio.currentTime = 0;
-    backgroundAudio.src = ""
-}
+window.addEventListener("load", (event) => {
+    console.log("page is fully loaded");
+   // localStorage.getItem('currentItem')
+    //console.log(localStorage.getItem('currentItem'));
+    
+  });
 
 let PINTRO, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P10END
+
 
 PINTRO = document.getElementById('P-INTRO')
 P1 = document.getElementById('P-1')
@@ -28,60 +23,83 @@ P9 = document.getElementById('P-9')
 P10 = document.getElementById('P-10')
 P10END = document.getElementById('P-10-THE-END')
 
+let backgroundAudio = new Audio('PRICE-OF-FREEDOM.mp3')
+let bubbleSounds = new Audio("BUBBLE-SOUNDS.mp3")
+
+function playAudio(audio) {
+    audio.play();
+  }
+
+function stopAudio(audio){
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = ""
+}
+
+
+
 
 let pagesArray = [PINTRO,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10]
-//let buttonsArray = [P1btn, P2btn, P3btn, P4btn, P5btn, P6btn, P7btn, P8btn, P9btn, P10btn]
+
 
 let buttonsArray = [...document.getElementsByClassName('btn-style')]
 
 
 
-let points = [...document.getElementsByTagName('span')]
+let pointsArray = [...document.getElementsByTagName('span')]
 
 
 
-function openNewCard(btnArray, pgsArray){
 
-    for (let item of btnArray){
-        
-        
-        for(let element of pgsArray){
-           
-            if (item.classList.contains(element.id)){
-            
+function openNewCard(btnArr, pgsArr){
+    for (let item of btnArr){        
+        for(let element of pgsArr){          
+            if (item.classList.contains(element.id)){            
                 item.onclick=function(){
                     item.parentNode.parentNode.style.display="none"
                     element.style.display='flex'
+                    //localStorage.setItem('currentItem', element.id);
                     if(item.id==="P-1btn"){
-                        playAudio()
+                        playAudio(backgroundAudio)
                     }
                     else if(item.classList.contains("P-INTRO")){
-                        points.forEach(span=>span.innerHTML=0)
-                        stopAudio()
+                        pointsArray.forEach(span=>span.innerHTML=0)
+                        stopAudio(backgroundAudio)
+                        //localStorage.removeItem('myCat');
                         location.reload();
                     }
                     else{
                         if (parseFloat(item.parentNode.parentNode.id.substring(2,9))<parseFloat(element.id.substring(2,9))){
-                            points.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+1)
+                            pointsArray.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+5)
                         }
                         else if(parseFloat(item.parentNode.parentNode.id.substring(2,9))>parseFloat(element.id.substring(2,9))){
-                            points.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)-1)
+                            pointsArray.forEach((span)=>{
+                                span.innerHTML=parseFloat(span.innerHTML)-10
+                                winOrLose(span.innerHTML)}
+                            )
                         }
-                    }
-                    
-                   
-                }
-            
+                    }                                       
+                }            
             }
-        }
-        
-    }
-    
+        }       
+    }   
 }
 
 openNewCard(buttonsArray,pagesArray)
 
-
+function winOrLose(score){
+    
+        if(score<0){
+            for (let item of pagesArray){
+                if(item.style.display==='flex'){
+                    item.style.display='none'
+                    PLOSE.style.display='flex'
+                }
+              
+            }
+        }
+    
+}
 
 
  
