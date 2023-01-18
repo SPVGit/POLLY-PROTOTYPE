@@ -1,5 +1,5 @@
 
-//INITIALIZATION--------------------------------------------------------------------------------------------------------
+//ELEMENT INITIALIZATION--------------------------------------------------------------------------------------------------------
 
 let canvasIntro = document.getElementById('canvas-intro')
 let canvasWin = document.getElementById('canvas-win')
@@ -12,26 +12,23 @@ let PLOSE = document.getElementById("P-LOSE")
 let canvasDiv = document.getElementById('cnv-and-btn-div')
 let canvasBtnDiv=document.getElementById('canvas-btns')
 let gameResult = '';
-// let isGameOn = false
+const canvas = document.getElementById('my-canvas');
+const ctx = canvas.getContext('2d');
 
-//-----------------------------------------------------------------------------------------------------------------------
+
+//IMAGE INITIALIZATION-----------------------------------------------------------------------------------------------------------------------
 
 const img = new Image();
 img.src = './IMAGES/6. UNDER-ICE.png';
+
+const img1 = new Image();
+img1.src = './IMAGES/6a. Penguin.png';
 
 const img2 = new Image();
 img2.src = './IMAGES/6b. killer-whale-transparent-9.png'
 
 const img3 = new Image();
 img3.src = './IMAGES/6c. EXPLOSION.png'
-
-let img4= new Image();
-img4.src=''
-
-//-----------------------------------------------------------------------------------------------------------------------
-
-const canvas = document.getElementById('my-canvas');
-const ctx = canvas.getContext('2d');
 
 //BACKGROUND ANIMATION----------------------------------------------------------------------------------------------------
 
@@ -42,27 +39,23 @@ const backgroundImage = {
   speed: +1,
   move: function() {
     this.x -= this.speed;
-   this.x %= canvas.width
+   this.x %= canvas.width +320
   },
   drawImg: function() {
     ctx.drawImage(this.img, this.x, this.y, canvas.width,canvas.height);
     if (this.speed < 0) {
-      ctx.drawImage(this.img, this.x - canvas.width,0);
+      ctx.drawImage(this.img, this.x + canvas.width*0.01,0);
     } else {
-      ctx.drawImage(this.img, this.x + canvas.width, 0 );
+      ctx.drawImage(this.img, this.x - canvas.width*0.01, 0 );
     }
   },
-  clearImg:function(){
-    ctx.drawImage(img4,this.x,this.y,canvas.width,canvas.height)
-  }
+
 };
 
 //BIRD AND OBSTACLE CONSTRUCTOR-----------------------------------------------------------------------------------------------
 
-const img1 = new Image();
-img1.src = './IMAGES/6a. Penguin.png';
-
 class Component {
+
   constructor(width, height, fill, x, y, speedX, speedY, gravity, gravitySpeed) {
     this.width = width;
     this.height = height;
@@ -90,12 +83,6 @@ class Component {
     ctx.fillStyle=this.fill
     ctx.fillRect(this.x, this.y, this.width, this.height)  
   }
-  clearImg(){
-    ctx.drawImage(img4,this.x,this.y,this.width,this.height)
-  } 
-  clearDrawing(){
-    ctx.clearRect(this.x,this.y,this.width,this.height)
-  }
   left() {
       return this.x;
   }
@@ -109,7 +96,7 @@ class Component {
     return this.y + this.height;
   }  
   crashWith(obstacle) {
-    return !(this.bottom() < obstacle.top()+10 || 
+    return !(this.bottom() < obstacle.top()+40 || 
     this.top() > obstacle.bottom()-40 || 
     this.right() < obstacle.left()+10 || 
     this.left() > obstacle.right()-10);
@@ -120,11 +107,12 @@ class Component {
         this.y = rockbottom;
       }
   }
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const newBird = new Component(60, 60, img1,50, 100, 0, 0, 0.04, 0);
+const newBird = new Component(60, 60, img1,50, 100, 0, 0, 0.1, 0);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -134,7 +122,7 @@ obsWidth = 120
 obsHeight = 80
 obsPosX=canvas.width
 obsPosY=Math.floor(Math.random()*canvas.height)
-obsSpeedX=-1.2
+obsSpeedX=-1.5
 obsSpeedY=-0.2   
 
 //-----------------------------------------------------------------------------------------------------------------------
@@ -224,6 +212,34 @@ function startGame() {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
+
+function restartGame(){
+  topObstacleArr=[]
+        bottomObstacleArr=[]
+
+        newBird.x=50
+        newBird.y=50
+        newBird.gravity=0.04
+        finishingLine.x=2500
+
+        for (let i=0;i<5;i++){ 
+          topObstacleArr.push(
+          new Component(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2, 0, 0)
+          )
+          topObstacleArr.push(
+            new Component(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4, 0, 0)
+          )  
+        }
+
+        for (let i=0;i<5;i++){
+          bottomObstacleArr.push(
+           new Component (obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY, 0, 0)
+          )
+          bottomObstacleArr.push(
+           new Component (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8, 0, 0)
+          )        
+        }  
+}
 
 function stopGame(){
 
@@ -315,7 +331,7 @@ function updateScore(obstacle,score){
 
 function keyOperation(){ 
 
-    gameClick.onclick=(()=>{
+    canvas.onclick=(()=>{
       newBird.speedY-=2.5
       bubbleSounds.play()
     })
@@ -338,7 +354,6 @@ function onloadCanvas(){
     canvasIntro.style.display="flex"
     canvasWin.style.display="none"
     restartBtn.style.display="none"
-    gameClick.style.display="none"
     gameResult="" 
 
 }
@@ -352,7 +367,6 @@ function duringCanvasGame(){
     canvasIntro.style.display="none"
     startBtn.style.display="none"
     restartBtn.style.display="flex"
-    gameClick.style.display="flex"
     
 }
 
@@ -365,7 +379,6 @@ function onWinCanvas(){
   canvas.style.display="none"
   canvasWin.style.display="flex"
   restartBtn.style.display="none"
-  gameClick.style.display="none"
   startBtn.style.display="none"
 
 }
@@ -386,31 +399,8 @@ window.onload = function() {
 
       restartBtn.onclick=function(){
         
-        topObstacleArr=[]
-        bottomObstacleArr=[]
+        restartGame()
 
-        newBird.x=50
-        newBird.y=100
-        newBird.gravity=0.04
-        finishingLine.x=2500
-
-        for (let i=0;i<5;i++){ 
-          topObstacleArr.push(
-          new Component(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2, 0, 0)
-          )
-          topObstacleArr.push(
-            new Component(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4, 0, 0)
-          )  
-        }
-
-        for (let i=0;i<5;i++){
-          bottomObstacleArr.push(
-           new Component (obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY, 0, 0)
-          )
-          bottomObstacleArr.push(
-           new Component (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8, 0, 0)
-          )        
-        }  
     }
 }
 //-----------------------------------------------------------------------------------------------------------------------

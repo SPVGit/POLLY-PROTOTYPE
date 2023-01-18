@@ -1,5 +1,6 @@
 
-//INITIALIZE CODE------------------------------------------------------------------------------
+
+
 window.addEventListener("load", (event) => {
     console.log("page is fully loaded");
    // localStorage.getItem('currentItem')
@@ -8,6 +9,21 @@ window.addEventListener("load", (event) => {
   });
 
 let PINTRO, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P10END
+
+//INITIALIZE CODE------------------------------------------------------------------------------
+
+class Page {
+    constructor(pageNumber){
+        this.div = document.getElementById(`P-${pageNumber}`)
+    }
+}
+let pagesArr = []
+
+for (let i = 1; i<27; i++){
+ pagesArr.push(new Page(i))
+}
+
+console.log(pagesArr[0]);
 
 
 PINTRO = document.getElementById('P-INTRO')
@@ -41,14 +57,9 @@ function stopAudio(audio){
 
 let pagesArray = [PINTRO,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10]
 
-
 let buttonsArray = [...document.getElementsByClassName('btn-style')]
 
-
-
 let pointsArray = [...document.getElementsByTagName('span')]
-
-
 
 
 function openNewCard(btnArr, pgsArr){
