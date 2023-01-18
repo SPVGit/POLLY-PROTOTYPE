@@ -8,10 +8,12 @@ let restartBtn=document.getElementById('restart-btn')
 let gameClick =document.getElementById('game-click')
 let hiddenBtnA = document.getElementById("hiddenBtnP6A")
 let hiddenBtnB = document.getElementById("hiddenBtnP6B")
-let PLOSE = document.getElementById("P-LOSE")
+let hiddenBtnBack = document.getElementById('hiddenBtnP6Back')
+let P6 = document.getElementById('P-6')
+let pLose = document.getElementById("P-LOSE")
 let canvasDiv = document.getElementById('cnv-and-btn-div')
 let canvasBtnDiv=document.getElementById('canvas-btns')
-let gameResult = '';
+let P6gameDiv=document.getElementById('P6gameDiv')
 const canvas = document.getElementById('my-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -30,33 +32,13 @@ img2.src = './IMAGES/6b. killer-whale-transparent-9.png'
 const img3 = new Image();
 img3.src = './IMAGES/6c. EXPLOSION.png'
 
-//BACKGROUND ANIMATION----------------------------------------------------------------------------------------------------
 
-const backgroundImage = {
-  img: img,
-  x: 0,
-  y:0,
-  speed: +1,
-  move: function() {
-    this.x -= this.speed;
-   this.x %= canvas.width +320
-  },
-  drawImg: function() {
-    ctx.drawImage(this.img, this.x, this.y, canvas.width,canvas.height);
-    if (this.speed < 0) {
-      ctx.drawImage(this.img, this.x + canvas.width*0.01,0);
-    } else {
-      ctx.drawImage(this.img, this.x - canvas.width*0.01, 0 );
-    }
-  },
-
-};
-
-//BIRD AND OBSTACLE CONSTRUCTOR-----------------------------------------------------------------------------------------------
+//BACKGROUND, BIRD AND OBSTACLE CONSTRUCTOR-----------------------------------------------------------------------------
 
 class Component {
 
-  constructor(width, height, fill, x, y, speedX, speedY, gravity, gravitySpeed) {
+  constructor(width, height, fill, x, y, speedX, speedY) {
+
     this.width = width;
     this.height = height;
     this.fill = fill;
@@ -64,27 +46,10 @@ class Component {
     this.y = y;
     this.speedX = speedX;
     this.speedY = speedY;
-    this.gravity=gravity;
-    this.gravitySpeed=gravitySpeed;
-  }
-  move(){
-    this.gravitySpeed += this.gravity;
-    this.x+=this.speedX;
-    this.y+=this.speedY+this.gravitySpeed;
-  }
-  newPos(){
-    this.x+=this.speedX;
-    this.y+=this.speedY;
-  }
-  drawImg(){
-    ctx.drawImage(this.fill, this.x, this.y, this.width, this.height); 
-  }
-  updateDrawing(){
-    ctx.fillStyle=this.fill
-    ctx.fillRect(this.x, this.y, this.width, this.height)  
+    
   }
   left() {
-      return this.x;
+    return this.x;
   }
   right() { 
       return this.x + this.width; 
@@ -98,7 +63,7 @@ class Component {
   crashWith(obstacle) {
     return !(this.bottom() < obstacle.top()+40 || 
     this.top() > obstacle.bottom()-40 || 
-    this.right() < obstacle.left()+10 || 
+    this.right() < obstacle.left()+10 ||  
     this.left() > obstacle.right()-10);
     }
   hitBottom(){
@@ -112,7 +77,94 @@ class Component {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const newBird = new Component(60, 60, img1,50, 100, 0, 0, 0.1, 0);
+class BackgroundImg extends Component{
+
+  constructor(width,height,fill,x,y,speedX,speedY){
+    super(width,height,fill,x,y,speedX,speedY)  
+  }
+
+  move(){
+    this.x -= this.speedX;
+    this.x %= canvas.width;
+  }
+  drawImg(){
+    ctx.drawImage(this.fill, this.x, this.y, canvas.width,canvas.height);
+    if (this.speedX > 0) {
+      ctx.drawImage(this.fill, this.x + canvas.width,0,canvas.width,canvas.height);
+    } else {
+      ctx.drawImage(this.fill, this.x - canvas.width, 0,canvas.width,canvas.height );
+    }
+  }
+
+  
+}
+//-----------------------------------------------------------------------------------------------------------------------
+
+class ObstaclesImg extends Component {
+
+  constructor(width,height,fill,x,y,speedX,speedY){
+    super(width,height,fill,x,y,speedX,speedY)  
+  }
+
+  newPos(){
+    this.x+=this.speedX;
+    this.y+=this.speedY;
+  }
+  drawImg(){
+    ctx.drawImage(this.fill, this.x, this.y, this.width, this.height); 
+  }
+
+}
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+class FinishingLine extends Component {
+
+  constructor(width,height,fill,x,y,speedX,speedY){
+    super(width,height,fill,x,y,speedX,speedY)  
+  }
+
+  newPos(){
+    this.x+=this.speedX;
+    this.y+=this.speedY;
+  }
+  updateDrawing(){
+    ctx.fillStyle=this.fill
+    ctx.fillRect(this.x, this.y, this.width, this.height)  
+  }
+
+}
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+class Bird extends Component {
+
+  constructor (width, height, fill, x, y, speedX, speedY, gravity, gravitySpeed){
+    super(width, height, fill, x, y, speedX, speedY)
+    this.gravity=gravity;
+    this.gravitySpeed=gravitySpeed;
+  }
+
+  move(){
+    this.gravitySpeed += this.gravity;
+    this.x+=this.speedX;
+    this.y+=this.speedY+this.gravitySpeed;
+  }
+  drawImg(){
+    ctx.drawImage(this.fill, this.x, this.y, this.width, this.height); 
+  }
+  
+}
+
+//extra margins added/removed 'crashWith' function to compensate for transparent backgrounds of png files.
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+const backgroundImg =  new BackgroundImg (canvas.width, canvas.height, img, 0, 0, 1, 0)
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+const newBird = new Bird (60, 60, img1,50, 100, 0, 0, 0.1, 0);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -131,10 +183,10 @@ let topObstacleArr = []
 
 for (let i=0;i<5;i++){ 
   topObstacleArr.push(
-  new Component(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2, 0, 0)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2)
   )
   topObstacleArr.push(
-    new Component(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4, 0, 0)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4)
   )
   
 }
@@ -146,24 +198,24 @@ let bottomObstacleArr=[]
 for (let i=0;i<5;i++){
 
   bottomObstacleArr.push(
-   new Component (obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY, 0, 0)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY)
   )
   bottomObstacleArr.push(
-   new Component (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8, 0, 0)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8)
   )
  
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-let finishingLine = new Component (30, canvas.height, "grey", 2500, 0, obsSpeedX, 0, 0, 0)
+const finishingLine = new FinishingLine (30, canvas.height, "yellow", 2500, 0, obsSpeedX, 0, 0, 0)
 
 //FUNCTIONS---------------------------------------------------------------------------------------------------------------
 
 function updateCanvas() {
 
-  backgroundImage.move();
-  backgroundImage.drawImg();
+  backgroundImg.move();
+  backgroundImg.drawImg();
   requestAnimationFrame(updateCanvas);
 
 }
@@ -224,26 +276,29 @@ function restartGame(){
 
         for (let i=0;i<5;i++){ 
           topObstacleArr.push(
-          new Component(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2, 0, 0)
+          new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2, 0, 0)
           )
           topObstacleArr.push(
-            new Component(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4, 0, 0)
+            new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4, 0, 0)
           )  
         }
 
         for (let i=0;i<5;i++){
           bottomObstacleArr.push(
-           new Component (obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY, 0, 0)
+           new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY, 0, 0)
           )
           bottomObstacleArr.push(
-           new Component (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8, 0, 0)
+           new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8, 0, 0)
           )        
         }  
+
 }
+
+//-----------------------------------------------------------------------------------------------------------------------
 
 function stopGame(){
 
-  backgroundImage.speed=0
+  backgroundImg.speedX=0
   finishingLine.speedX=0
   newBird.speedY=0
   newBird.gravity=0
@@ -266,43 +321,40 @@ function checkGameOver(){
 
   let currentScore= parseFloat(pointsArray[0].innerHTML)
 
-    if ((newBird.y+newBird.height>=canvas.height) || newBird.y<0) {
+    if ((newBird.y+newBird.height>=canvas.height) || newBird.y<0) {  //colliding against sides of canvas
         newBird.hitBottom()
         newBird.fill= img3
-        gameResult='lose'
         stopGame()
         setTimeout(function(){
             updateScore("side",currentScore)
             P6.style.display='none'
-            PLOSE.style.display='flex'
+            pLose.style.display='flex'
         },500)
     }
 
-    else if ((newBird.y+newBird.height<canvas.height) || newBird.y>0) {
+    else if ((newBird.y+newBird.height<canvas.height) || newBird.y>0) { //colliding against obstacles
         for(let item of topObstacleArr){
             let itemNumber = topObstacleArr.indexOf(item);
             for(let element of bottomObstacleArr){
                 let elementNumber = bottomObstacleArr.indexOf(item);
 
-                if((newBird.crashWith(item) && item.fill===img2)||(newBird.crashWith(element) && element.fill===img2)){ 
+                if(newBird.crashWith(item) ||(newBird.crashWith(element))){ 
                     newBird.fill= img3
-                    gameResult='lose'
                     updateScore(itemNumber,currentScore)
                     updateScore(elementNumber,currentScore)
                     stopGame()
                     setTimeout(function(){  
                         P6.style.display='none'
-                        PLOSE.style.display='flex'
+                        pLose.style.display='flex'
                     },500)  
                 } 
 
-                else if(newBird.crashWith(finishingLine)&&finishingLine.fill==='grey'){
-                    gameResult='win'
+                else if(newBird.crashWith(finishingLine)){ //colliding against finishing line
                     setTimeout(function(){
                       stopGame()
                       updateScore("finishingLine",currentScore)
                       onWinCanvas()
-                    },1500)  
+                    },1200)  
                 }  
             }   
         }
@@ -331,12 +383,12 @@ function updateScore(obstacle,score){
 
 function keyOperation(){ 
 
-    canvas.onclick=(()=>{
+    P6gameDiv.onclick=(()=>{ //for tapping on mobile screen
       newBird.speedY-=2.5
       bubbleSounds.play()
     })
 
-    document.onkeydown = function (e) {
+    document.onkeydown = function (e) {  //space bar function for larger screens
       if (e.keyCode == 32) {
         e.preventDefault();
           newBird.speedY-=2.5
@@ -367,20 +419,21 @@ function duringCanvasGame(){
     canvasIntro.style.display="none"
     startBtn.style.display="none"
     restartBtn.style.display="flex"
-    
+    hiddenBtnBack.style.display='none'
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
 
 function onWinCanvas(){
 
-  hiddenBtnA.style.visibility='visible'
-  hiddenBtnB.style.visibility='visible'
+  hiddenBtnA.style.display='flex'
+  hiddenBtnB.style.display='flex'
+  hiddenBtnBack.style.display='flex'
   canvas.style.display="none"
   canvasWin.style.display="flex"
   restartBtn.style.display="none"
   startBtn.style.display="none"
-
+  
 }
 
 //-----------------------------------------------------------------------------------------------------------------------

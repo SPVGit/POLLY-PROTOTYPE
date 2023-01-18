@@ -68,6 +68,7 @@
         background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         border-radius: 10%; 
         
+        
     }
 
     .img-div{
@@ -102,6 +103,7 @@
         display: flex;
         flex-direction: column;
         align-items: center; 
+       
     }
     h2{
         font-size: 1.2rem;
@@ -116,9 +118,10 @@
         width:100%;
         display: flex;
         flex-direction: row;
+        align-items: baseline;
         justify-content: space-evenly;
-        align-items: center;
-        margin-top: -12%;
+        margin-top: -15%;
+          
     }
     .btn-style{
         border-radius: 15%;
@@ -136,6 +139,7 @@
         align-items: center;
         box-shadow: 2px 2px grey;
         border-width:5px;
+        
     }
     #P-1btn{
         border-radius: 15%;
@@ -182,7 +186,8 @@
         background: -webkit-linear-gradient(to right, #bdc3c7, white);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #bdc3c7, white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         border-radius: 10%;
-        margin-top:5%;
+        margin-top:2%;
+        margin-bottom: 2%;
         padding:5%;
         border-style:solid;
         border-width:10px;
@@ -223,7 +228,7 @@
       
     }
     .hidden-btn{
-        visibility: hidden;
+        display: none;
         
     }
     #canvas-win{
@@ -252,33 +257,25 @@
     #sad-face{
         width: 150px;
     }
-    #canvas-btns{
-        display:flex;
-        flex-direction: row;
-        align-items: baseline;
-        justify-content: space-evenly;
-        margin-bottom: 2%;
-        width: 100%;
-        
-    }
+
     .btn-cnv{
-        padding:5%;
-        width:30%;
+        
+        width:35%;
         background-color: grey;
+    
     }
-   #cnv-btn-div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width:100%;
 
-   }
-  .canvas-div{
-    margin-bottom: 10%;
-  }
 
-  
+    .canvas-div{
+        margin-bottom: 10%;
+    }
+
+    
+    #text-div{
+        margin-top:5%;
+        margin-bottom: 10%;
+    }
+
 }
 
 /*--------LOW RESOLUTION TABLETS & IPADS-----------------------------------------------------*/

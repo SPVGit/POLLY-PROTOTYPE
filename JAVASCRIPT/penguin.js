@@ -1,116 +1,151 @@
-
-
+//LOCAL STORAGE------------------------------------------------------------------------------------------------
 
 window.addEventListener("load", (event) => {
     console.log("page is fully loaded");
+ 
    // localStorage.getItem('currentItem')
     //console.log(localStorage.getItem('currentItem'));
     
   });
 
-let PINTRO, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P10END
+//DIVS, BUTTONS AND POINTS ARRAYS------------------------------------------------------------------------------
 
-//INITIALIZE CODE------------------------------------------------------------------------------
+let pagesArray = []
+
+let buttonsArray = [...document.getElementsByClassName('btn-style')]
+
+let pointsArray = [...document.getElementsByTagName('span')]
+
+//CREATING DIV OBJECTS------------------------------------------------------------------------------------------
 
 class Page {
     constructor(pageNumber){
         this.div = document.getElementById(`P-${pageNumber}`)
     }
 }
-let pagesArr = []
 
-for (let i = 1; i<27; i++){
- pagesArr.push(new Page(i))
+for (let i = 1; i<11; i++){
+ pagesArray.push(new Page(i))
 }
 
-console.log(pagesArr[0]);
+pagesArray.unshift(new Page("INTRO"))
+pagesArray.push(new Page (`WIN`))
+pagesArray.push(new Page (`LOSE`))
+pagesArray.push(new Page(`END`))
 
-
-PINTRO = document.getElementById('P-INTRO')
-P1 = document.getElementById('P-1')
-P2 = document.getElementById('P-2')
-P3 = document.getElementById('P-3')
-P4 = document.getElementById('P-4')
-P5 = document.getElementById('P-5')
-P6 = document.getElementById('P-6')
-P7 = document.getElementById('P-7')
-P8 = document.getElementById('P-8')
-P9 = document.getElementById('P-9')
-P10 = document.getElementById('P-10')
-P10END = document.getElementById('P-10-THE-END')
+//CREATING AUDIO OBJECTS---------------------------------------------------------------------------------------
 
 let backgroundAudio = new Audio('PRICE-OF-FREEDOM.mp3')
 let bubbleSounds = new Audio("BUBBLE-SOUNDS.mp3")
 
-function playAudio(audio) {
+//FUNCTIONS-----------------------------------------------------------------------------------------------------
+
+function openAndClosePage(btn,el){
+
+    btn.parentNode.parentNode.style.display="none"
+    el.div.style.display='flex'
+
+}
+
+function playAudio(audio,btn) {
+
+    if(btn.id==="P-1btn")
     audio.play();
-  }
+
+}
 
 function stopAudio(audio){
+
     audio.pause();
     audio.currentTime = 0;
     audio.src = ""
+    
 }
 
+function pointsCalculator(btn,el){
 
+    if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(el.div.id.substring(2,9))){
+        pointsArray.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+5)
+    }
 
+    else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(el.div.id.substring(2,9))){
+        pointsArray.forEach((span)=>{
+        span.innerHTML=parseFloat(span.innerHTML)-10
+        winOrLose(span.innerHTML,el)})
+    }
 
-let pagesArray = [PINTRO,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10]
+}
 
-let buttonsArray = [...document.getElementsByClassName('btn-style')]
+function winOrLose(score,el){
 
-let pointsArray = [...document.getElementsByTagName('span')]
-
-
-function openNewCard(btnArr, pgsArr){
-    for (let item of btnArr){        
-        for(let element of pgsArr){          
-            if (item.classList.contains(element.id)){            
-                item.onclick=function(){
-                    item.parentNode.parentNode.style.display="none"
-                    element.style.display='flex'
-                    //localStorage.setItem('currentItem', element.id);
-                    if(item.id==="P-1btn"){
-                        playAudio(backgroundAudio)
-                    }
-                    else if(item.classList.contains("P-INTRO")){
-                        pointsArray.forEach(span=>span.innerHTML=0)
-                        stopAudio(backgroundAudio)
-                        //localStorage.removeItem('myCat');
-                        location.reload();
-                    }
-                    else{
-                        if (parseFloat(item.parentNode.parentNode.id.substring(2,9))<parseFloat(element.id.substring(2,9))){
-                            pointsArray.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+5)
-                        }
-                        else if(parseFloat(item.parentNode.parentNode.id.substring(2,9))>parseFloat(element.id.substring(2,9))){
-                            pointsArray.forEach((span)=>{
-                                span.innerHTML=parseFloat(span.innerHTML)-10
-                                winOrLose(span.innerHTML)}
-                            )
-                        }
-                    }                                       
-                }            
-            }
-        }       
+    if(score<0){ 
+        if(el.div.style.display==='flex'){
+            el.div.style.display='none'
+            pagesArray[pagesArray.length-2].div.style.display='flex'
+        }             
     }   
+
 }
 
-openNewCard(buttonsArray,pagesArray)
+function restart(btn){
 
-function winOrLose(score){
+    if(btn.classList.contains("P-INTRO")){
+        pointsArray.forEach(span=>span.innerHTML=0)
+        stopAudio(backgroundAudio)
+        location.reload();
+    }
     
-        if(score<0){
-            for (let item of pagesArray){
-                if(item.style.display==='flex'){
-                    item.style.display='none'
-                    PLOSE.style.display='flex'
-                }
-              
-            }
+}
+
+function onGameStart(btnArr, pgsArr){
+
+    for (let btn of btnArr){        
+        for(let el of pgsArr){          
+            if (btn.classList.contains(el.div.id)){   
+
+                btn.onclick=function(){
+
+                    openAndClosePage(btn,el)
+                    pointsCalculator(btn,el)
+                    playAudio(backgroundAudio,btn)
+                    restart(btn)                   
+
+                }                                       
+            }            
         }
+    }      
+
+}   
     
-}
+onGameStart(buttonsArray,pagesArray)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //localStorage.setItem('currentItem', element.id);
+//localStorage.removeItem('myCat');
+/*if(item.classList.contains("P-INTRO")){
+    pointsArray.forEach(span=>span.innerHTML=0)
+    stopAudio(backgroundAudio)
+   
+    location.reload();*/
+
+
+
 
 
  

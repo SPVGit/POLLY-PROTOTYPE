@@ -37,7 +37,7 @@
             </div>
             
             
-            <div class="text-div">
+            <div id="text-div">
 
                 <p id="rules-heading">
 
@@ -49,10 +49,10 @@
 
                     <ol>
 
-                        <li>The aim of this game is to find a lost <br>
+                        <li class="rules-li">The aim of this game is to find a lost <br>
                             treasure and finish with positive points</li>
-                        <li>Going forward earns you points</li>
-                        <li>Going backwards leads to negative points</li>
+                        <li class="rules-li">Going forward earns you points</li>
+                        <li class="rules-li">Going backwards leads to negative points</li>
 
                     </ol>
 
@@ -305,41 +305,40 @@
         <!---------------------------------------------PAGE 6--------------------------------------------------------------->
 
         <div id = "P-6" class = "story div-style">
+            <div id="P6gameDiv">
+                <div id="cnv-and-btn-div">
 
-            <div id="cnv-and-btn-div">
-
-                <div id="canvas-win"><p>YOU MADE IT!!! Do you still want Polly to go back the way she came?
-                    Or A: continue on in search of her friends, or B: roam around aimlessly?
-                </p></div>
-
-                <div id="canvas-intro"><p>Click 'Swim' and tap the game window to help Polly get past dangerous predators and activate the next stage of the adventure! <br>If you reach the finishing line you get 20 points. <br>Otherwise, you get negative points and you lose the game.</p></div>
-
-                <canvas id="my-canvas" width="340" height="350"></canvas>
-
-                
-
+                    <div id="canvas-win"><p>YOU MADE IT!!! Do you still want Polly to go back the way she came?
+                        Or A: continue on in search of her friends, or B: roam around aimlessly?
+                    </p></div>
+    
+                    <div id="canvas-intro"><p>Click 'Swim' and tap anywhere on the game window to help Polly get past dangerous predators and activate the next stage of the adventure! <br>
+                        You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get 20 points. <br>Otherwise, you get negative points and you lose the game.</p></div>
+    
+                    <canvas id="my-canvas" width="340" height="350"></canvas>
+     
+    
+                </div>
+           
+                <div class="points-div">
+        
+                    <strong>Points:
+        
+                        <span>0</span>
+        
+                    </strong>
+        
+                </div>
             </div>
-            <div id="canvas-btns">
+            
 
-                <button id="start-button" class="btn-style btn-cnv">Swim</button>
-                
-                <button id="restart-btn" class="btn-style btn-cnv">Restart Swim</button>
-
-            </div>
-            <div class="points-div">
-    
-                <strong>Points:
-    
-                    <span>0</span>
-    
-                </strong>
-    
-            </div>
             <div id="cnv-pg-btns" class="button-div canvas-div">
                 
-                <button class="btn-style P-5">Back</button>
+                <button id="hiddenBtnP6Back" class="btn-style P-5">Back</button>
+                <button id="start-button" class="btn-style btn-cnv">Swim</button>
                 <button id="hiddenBtnP6A"class="btn-style P-7 hidden-btn">A</button>
                 <button id="hiddenBtnP6B"class="btn-style hidden-btn">B</button>
+                <button id="restart-btn" class="btn-style btn-cnv">Swim</button>
                 <button class="btn-style P-INTRO">Restart</button>
     
             </div>
@@ -432,7 +431,7 @@
                     <ol>
 
 
-                        <li>Surely its time for Polly to run back, or A: does she still want to brave it and tip-toe past Mr Wolf? </li>
+                        <li>Surely its time for Polly to run back, or A: does she still want to brave it? </li>
     
                     </ol>
                 </p>   
@@ -553,7 +552,7 @@
         <div id = "P-END" class = "story"></div>
 
 
-        <div id class = "story"></div>
+        <div id = "P-WIN" class = "story"></div>
         <div id class = "story"></div>
         <div id class = "story"></div>
         <div id class = "story"></div>
@@ -630,7 +629,7 @@
             <div class="button-div">
                 
                 <button class="btn-style P-INTRO">Restart</button>
-                <button class="btn-style new-game">New Game</button>
+                <button class="btn-style new-game">End</button>
                 
             
             </div>
@@ -639,8 +638,7 @@
         
         <div id="P-NEW" class = "story"></div>
     
-    
-   
+
     <script src="./JAVASCRIPT/penguin.js"></script>
     <script src="./JAVASCRIPT/canvas.js"></script>
 </body>
