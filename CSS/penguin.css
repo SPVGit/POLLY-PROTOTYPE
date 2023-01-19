@@ -3,18 +3,27 @@
 
 @media screen and (max-width: 480px){
     html{
+
         font-family: 'Comic Neue';
         font-size: 22px;
+        overflow-x: hidden;
+
     }
     body{
+
         margin: 0;
         display:flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background-color: black;
+        width: auto!important;
+        height: auto!important;
+        overflow-x: hidden!important
+
     }
     header{
+
         display:flex;
         flex-direction: column;
         align-items: center;
@@ -24,17 +33,22 @@
         
     }
     #heading{
+        
         width:100vw;
-        margin:2%;   
+        margin:2%;  
+       
     }
     #sub-heading{
+
         width:70%
+
     }
     #P-INTRO{    
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
         border-style:solid;
         border-color: black;
         border-width: 15px;
@@ -45,18 +59,21 @@
         background: #2980B9;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
         border-radius: 10%; 
         display:block;
+
     }
     #intro-penguin{
+
         margin-top: 20%;
+
     }
    
     .story{
+
         display: none;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center; 
         border-style:solid;
         border-color: black;
@@ -67,25 +84,32 @@
         background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         border-radius: 10%; 
-        
-        
+    
     }
 
     .img-div{
+
         margin-top: -2%;
-        margin-bottom: 2%;
+       
         margin-left:2%;  
         width:90%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center; 
+
     }
     .intro-img-div{
+
         margin-top: -10%;
-        width:100%
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
     }
     .penguin{
+
         height:150px;
         width:250px;
         border-radius: 10%;
@@ -93,12 +117,16 @@
         border-color: black;
         border-width:10px;
         box-shadow: 2px 2px grey;
+
     }
    
     ol{
-        margin-right:5%
+
+        margin-right:5%;
+
     }
     .story-text{
+
         margin-top: -15%;
         display: flex;
         flex-direction: column;
@@ -106,15 +134,20 @@
        
     }
     h2{
+
         font-size: 1.2rem;
         text-align: center;
     }
+ 
     li{
+
         font-size: 0.6rem;
         list-style:circle;
         font-weight: bold;
+
     }
     .button-div{
+
         width:100%;
         display: flex;
         flex-direction: row;
@@ -124,6 +157,7 @@
           
     }
     .btn-style{
+
         border-radius: 15%;
         padding:10px;
         height: 50px;
@@ -142,13 +176,16 @@
         
     }
     #P-1btn{
+
         border-radius: 15%;
         padding:10px;
         width:20%;
         background-color:  #FFFFFF;;
         margin-top: 10%;
+
     }
     strong{
+
         height:50px;
         background: #bdc3c7;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #bdc3c7, white);  /* Chrome 10-25, Safari 5.1-6 */
@@ -163,14 +200,18 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+
     }
     .bullet-points{
+
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
     }
     .points-div{
-        margin-top:2%;
+
+        
         width:100%;
         display: flex;
         flex-direction: column;
@@ -178,6 +219,7 @@
           
     }
     #div-puzzle1{
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -192,46 +234,62 @@
         border-style:solid;
         border-width:10px;
         box-shadow: 2px 2px grey;
+
     }
     .quiz-p{
+
         text-align: center;
         font-size: 0.8rem;
         font-weight: bold;
         margin:1%;
+
     }
     .quiz-input{
+
         width:60%;
         border-radius:10%;
         margin-bottom:1%;
+
     }
     span{
+
         font-size: 0.8rem;
+
     }
     strong{
+
         font-size: 0.8rem;
         box-shadow: 2px 2px grey;
+
     }
     .canvas-div{
+
         margin-top:10%;
+
     }
     canvas{
+
         border-style: solid;
         border-color: black;
         border-width: 10px;
         border-radius:10%;
         display:none;
         box-shadow: 2px 2px grey;
-        
+  
     }
+
     #start-button{
+
        margin-top:5%;
       
     }
     .hidden-btn{
+
         display: none;
         
     }
     #canvas-win{
+
         border-style: solid;
         border-color: black;
         border-width: 10px;
@@ -241,6 +299,7 @@
         font-size:0.8rem;
         display:none;
         box-shadow: 2px 2px grey;
+
     }
     #canvas-intro{
         
@@ -253,29 +312,37 @@
         margin:5%;
         font-size:0.8rem;
         box-shadow: 2px 2px grey;
+
     }
     #sad-face{
-        width: 150px;
-    }
 
+        width: 150px;
+
+    }
     .btn-cnv{
         
         width:35%;
         background-color: grey;
     
     }
-
-
     .canvas-div{
-        margin-bottom: 10%;
-    }
 
-    
+        margin-bottom: 10%;
+
+    }
     #text-div{
+
         margin-top:5%;
         margin-bottom: 10%;
-    }
 
+    }
+ 
+    .face{
+       
+        background: #bdc3c7;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #bdc3c7, white);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #bdc3c7, white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
 }
 
 /*--------LOW RESOLUTION TABLETS & IPADS-----------------------------------------------------*/

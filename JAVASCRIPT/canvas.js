@@ -9,11 +9,11 @@ let gameClick =document.getElementById('game-click')
 let hiddenBtnA = document.getElementById("hiddenBtnP6A")
 let hiddenBtnB = document.getElementById("hiddenBtnP6B")
 let hiddenBtnBack = document.getElementById('hiddenBtnP6Back')
-let P6 = document.getElementById('P-6')
+let p6 = document.getElementById('P-6')
 let pLose = document.getElementById("P-LOSE")
 let canvasDiv = document.getElementById('cnv-and-btn-div')
 let canvasBtnDiv=document.getElementById('canvas-btns')
-let P6gameDiv=document.getElementById('P6gameDiv')
+let p6gameDiv=document.getElementById('P6gameDiv')
 const canvas = document.getElementById('my-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -164,7 +164,7 @@ const backgroundImg =  new BackgroundImg (canvas.width, canvas.height, img, 0, 0
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const newBird = new Bird (60, 60, img1,50, 100, 0, 0, 0.1, 0);
+const newBird = new Bird (60, 60, img1,50, 100, 0, 0, 0.05, 0);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -327,7 +327,7 @@ function checkGameOver(){
         stopGame()
         setTimeout(function(){
             updateScore("side",currentScore)
-            P6.style.display='none'
+            p6.style.display='none'
             pLose.style.display='flex'
         },500)
     }
@@ -344,7 +344,7 @@ function checkGameOver(){
                     updateScore(elementNumber,currentScore)
                     stopGame()
                     setTimeout(function(){  
-                        P6.style.display='none'
+                        p6.style.display='none'
                         pLose.style.display='flex'
                     },500)  
                 } 
@@ -383,7 +383,7 @@ function updateScore(obstacle,score){
 
 function keyOperation(){ 
 
-    P6gameDiv.onclick=(()=>{ //for tapping on mobile screen
+    p6gameDiv.onclick=(()=>{ //for tapping on mobile screen
       newBird.speedY-=2.5
       bubbleSounds.play()
     })

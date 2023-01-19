@@ -1,3 +1,32 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //localStorage.setItem('currentItem', element.id);
+//localStorage.removeItem('myCat');
+/*if(item.classList.contains("P-INTRO")){
+    pointsArray.forEach(span=>span.innerHTML=0)
+    stopAudio(backgroundAudio)
+   
+    location.reload();*/
+
+
+
+
+
+
 //LOCAL STORAGE------------------------------------------------------------------------------------------------
 
 window.addEventListener("load", (event) => {
@@ -24,14 +53,17 @@ class Page {
     }
 }
 
-for (let i = 1; i<11; i++){
+for (let i = 1; i<15; i++){
  pagesArray.push(new Page(i))
 }
 
 pagesArray.unshift(new Page("INTRO"))
 pagesArray.push(new Page (`WIN`))
 pagesArray.push(new Page (`LOSE`))
-pagesArray.push(new Page(`END`))
+//pagesArray.push(new Page(`END`))
+
+console.log(pagesArray);
+
 
 //CREATING AUDIO OBJECTS---------------------------------------------------------------------------------------
 
@@ -81,7 +113,7 @@ function winOrLose(score,el){
     if(score<0){ 
         if(el.div.style.display==='flex'){
             el.div.style.display='none'
-            pagesArray[pagesArray.length-2].div.style.display='flex'
+            pagesArray[pagesArray.length-1].div.style.display='flex'
         }             
     }   
 
@@ -120,32 +152,3 @@ function onGameStart(btnArr, pgsArr){
 onGameStart(buttonsArray,pagesArray)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- //localStorage.setItem('currentItem', element.id);
-//localStorage.removeItem('myCat');
-/*if(item.classList.contains("P-INTRO")){
-    pointsArray.forEach(span=>span.innerHTML=0)
-    stopAudio(backgroundAudio)
-   
-    location.reload();*/
-
-
-
-
-
- 
