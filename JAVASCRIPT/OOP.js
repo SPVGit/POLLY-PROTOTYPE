@@ -1,3 +1,6 @@
+
+//SUPER CLASS---------------------------------------------------------------------------
+
 class OneBtnDiv {
 
     constructor(prevPg,currentPg,nextPg,imgPath,list) {
@@ -16,80 +19,82 @@ class OneBtnDiv {
         this.div=div
         
     
-            let imgDiv = document.createElement('div');
-            imgDiv.classList.add('img-Div');
-            this.imgDiv = imgDiv
+        let imgDiv = document.createElement('div');
+        imgDiv.classList.add('img-Div');
+        this.imgDiv = imgDiv
     
-                if(this.imgPath) {
-                    let imgTag = document.createElement('img');
-                    imgTag.classList.add('penguin');
-                    imgTag.setAttribute('src',`${this.imgPath}`); //add image path
-                    this.imgTag=imgTag
+        if(this.imgPath) {
+            let imgTag = document.createElement('img');
+            imgTag.classList.add('penguin');
+            imgTag.setAttribute('src',`${this.imgPath}`); //add image path
+            this.imgTag=imgTag
 
-                    imgDiv.appendChild(imgTag);
-                }
-                
-                
-            let pointsDiv = document.createElement('div');
-            pointsDiv.classList.add('points-div');
-            this.pointsDiv=pointsDiv
+            imgDiv.appendChild(imgTag);
+        }
+                        
+        let pointsDiv = document.createElement('div');
+        pointsDiv.classList.add('points-div');
+        this.pointsDiv=pointsDiv
 
-                let strong = document.createElement('strong');
-                strong.innerHTML = 'Points:';
+        let strong = document.createElement('strong');
+        strong.innerHTML = 'Points:';
+        this.strong=strong
 
-                    let span = document.createElement('span');
-                    span.innerHTML = 0;
+        let span = document.createElement('span');
+        span.innerHTML = 0;
     
-                        strong.appendChild(span)
-                        pointsDiv.appendChild(strong)
+        strong.appendChild(span)
+        pointsDiv.appendChild(strong)
     
-            let textDiv = document.createElement('div')
-            textDiv.classList.add('story-text')
-            this.textDiv=textDiv
+        let textDiv = document.createElement('div')
+        textDiv.classList.add('story-text')
+        this.textDiv=textDiv
 
-                let para = document.createElement('p')
-                para.classList.add('bullet-points')
-                this.para=para
+        let para = document.createElement('p')
+        para.classList.add('bullet-points')
+        this.para=para
 
-                    let ol = document.createElement('ol')
-                    ol.innerHTML = `${this.list}` // add the story here in list tags
-                    this.ol=ol
+        let ol = document.createElement('ol')
+        ol.innerHTML = `${this.list}` // add the story here in list tags
+        this.ol=ol
     
-                        para.appendChild(ol)
-                        textDiv.appendChild(para)
+        para.appendChild(ol)
+        textDiv.appendChild(para)
     
-            let buttonDiv = document.createElement('div')
-            buttonDiv.classList.add('button-div')
-            this.buttonDiv=buttonDiv
+        let buttonDiv = document.createElement('div')
+        buttonDiv.classList.add('button-div')
+        this.buttonDiv=buttonDiv
     
-                let backBtn = document.createElement('button')
-                backBtn.classList.add('btn-style', `P-${this.prevPg}`) //add previous page number
-                backBtn.innerHTML='Back'
-                this.backBtn=backBtn;
+        let backBtn = document.createElement('button')
+        backBtn.classList.add('btn-style', `P-${this.prevPg}`) //add previous page number
+        backBtn.innerHTML='Back'
+        this.backBtn=backBtn;
     
-                let forwardBtnA = document.createElement('button')
-                forwardBtnA.classList.add('btn-style', `P-${this.nextPg}`) //add following page number
-                forwardBtnA.innerHTML='A'
-                this.forwardBtnA=forwardBtnA;
+        let forwardBtnA = document.createElement('button')
+        forwardBtnA.classList.add('btn-style', `P-${this.nextPg}`) //add following page number
+        forwardBtnA.innerHTML='A'
+        this.forwardBtnA=forwardBtnA;
     
-                let restartBtn = document.createElement('button')
-                restartBtn.classList.add('btn-style','P-INTRO')
-                restartBtn.innerHTML='Restart'
-                this.restartBtn=restartBtn
+        let restartBtn = document.createElement('button')
+        restartBtn.classList.add('btn-style','P-INTRO')
+        restartBtn.innerHTML='Restart'
+        this.restartBtn=restartBtn
     
-                    buttonDiv.appendChild(backBtn)
-                    buttonDiv.appendChild(forwardBtnA)
-                    buttonDiv.appendChild(restartBtn)
+        buttonDiv.appendChild(backBtn)
+        buttonDiv.appendChild(forwardBtnA)
+        buttonDiv.appendChild(restartBtn)
     
-            div.appendChild(imgDiv)
-            div.appendChild(pointsDiv)
-            div.appendChild(textDiv)
-            div.appendChild(buttonDiv)
+        div.appendChild(imgDiv)
+        div.appendChild(pointsDiv)
+        div.appendChild(textDiv)
+        div.appendChild(buttonDiv)
     
         body.appendChild(div)
 
     }
 }
+
+//SUBCLASSES------------------------------------------------------------------------------------
 
 class IntroDiv extends OneBtnDiv{
 
@@ -105,15 +110,15 @@ class IntroDiv extends OneBtnDiv{
         let header = document.createElement('header')
       
 
-            let headerImg1 = document.createElement('img')
-            headerImg1.setAttribute('id','heading')
-            headerImg1.setAttribute('src',`${this.headerImg}`) //add header image
-            let subheaderImg1 = document.createElement('img')
-            subheaderImg1.setAttribute('id','sub-heading')
-            subheaderImg1.setAttribute('src',`${this.subheaderImg}`) //add subheader image
+        let headerImg1 = document.createElement('img')
+        headerImg1.setAttribute('id','heading')
+        headerImg1.setAttribute('src',`${this.headerImg}`) //add header image
+        let subheaderImg1 = document.createElement('img')
+        subheaderImg1.setAttribute('id','sub-heading')
+        subheaderImg1.setAttribute('src',`${this.subheaderImg}`) //add subheader image
 
-                header.appendChild(headerImg1)
-                header.appendChild(subheaderImg1)
+        header.appendChild(headerImg1)
+        header.appendChild(subheaderImg1)
 
         this.imgDiv.classList.add('intro-img-div')
         this.imgTag.setAttribute('id','intro-penguin')
@@ -124,11 +129,11 @@ class IntroDiv extends OneBtnDiv{
         this.para.classList.remove('bullet-points')
         let rulesPara = document.createElement('p')
 
-            let rulesHeader = document.createElement('h2')
-            rulesHeader.innerHTML='RULES OF THE GAME'
+        let rulesHeader = document.createElement('h2')
+        rulesHeader.innerHTML='RULES OF THE GAME'
 
-                rulesPara.appendChild(rulesHeader)
-                this.textDiv.insertBefore(rulesPara,this.para)
+        rulesPara.appendChild(rulesHeader)
+        this.textDiv.insertBefore(rulesPara,this.para)
 
         this.ol.innerHTML=`${this.list}`
         let startBtn = document.createElement('button')
@@ -136,10 +141,10 @@ class IntroDiv extends OneBtnDiv{
         startBtn.classList.add(`P-${this.nextPg}`,'btn-style')
         startBtn.innerHTML=`Start`
 
-            this.buttonDiv.removeChild(this.backBtn)
-            this.buttonDiv.removeChild(this.forwardBtnA)
-            this.buttonDiv.removeChild(this.restartBtn)
-            this.buttonDiv.appendChild(startBtn)
+        this.buttonDiv.removeChild(this.backBtn)
+        this.buttonDiv.removeChild(this.forwardBtnA)
+        this.buttonDiv.removeChild(this.restartBtn)
+        this.buttonDiv.appendChild(startBtn)
         
         this.div.classList.remove('story')
         this.div.setAttribute('id', 'P-INTRO')
@@ -149,6 +154,8 @@ class IntroDiv extends OneBtnDiv{
     }
 
 }
+
+//------------------------------------------------------------------------------------
 
 class FirstPageDiv extends OneBtnDiv{
 
@@ -160,6 +167,8 @@ class FirstPageDiv extends OneBtnDiv{
     }
 
 }
+
+//------------------------------------------------------------------------------------
 
 class TwoBtnDiv extends OneBtnDiv{
 
@@ -179,6 +188,202 @@ class TwoBtnDiv extends OneBtnDiv{
 
 }
 
+//---------------------------------------------------------------------------------------
+
+class QuizDiv extends OneBtnDiv{
+
+    constructor(prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpara,thirdpara, Qnum1,Qnum2,Qnum3, hidBtnForwardA, inp1Length, inp2Length, inp3Length){
+
+        super(prevPg,currentPg,nextPg,imgPath,list)
+
+        
+        this.firstpara=firstpara
+        this.secondpara=secondpara
+        this.thirdpara=thirdpara
+
+        this.div.removeChild(this.imgDiv)
+        
+        let quizDiv = document.createElement('div')
+        quizDiv.setAttribute('id','div-puzzle1')
+
+        let para1 = document.createElement('p')
+        para1.classList.add('quiz-p')
+        para1.innerHTML=firstpara
+
+        let input1 = document.createElement('input')
+        input1.classList.add('quiz-input')
+        input1.setAttribute('id',`input${Qnum1}`)
+        input1.setAttribute('type','text')
+        input1.setAttribute('placeholder','Type here')
+        input1.setAttribute('maxlength',`${inp1Length}`)
+
+        let para2 = document.createElement('p')
+        para2.classList.add('quiz-p')
+        para2.innerHTML=secondpara
+
+        let input2 = document.createElement('input')
+        input2.classList.add('quiz-input')
+        input2.setAttribute('id',`input${Qnum2}`)
+        input2.setAttribute('type','text')
+        input2.setAttribute('placeholder','Type here')
+        input2.setAttribute('maxlength',`${inp2Length}`)
+
+        let para3 = document.createElement('p')
+        para3.classList.add('quiz-p')
+        para3.innerHTML=thirdpara
+
+        let input3 = document.createElement('input')
+        input3.classList.add('quiz-input')
+        input3.setAttribute('id',`input${Qnum3}`)
+        input3.setAttribute('type','text')
+        input3.setAttribute('placeholder','Type here')
+        input3.setAttribute('maxlength',`${inp3Length}`)
+
+        let tickImg = new Image()
+        tickImg.src='./IMAGES/TICK.png'
+        
+        let crossImg = new Image()
+        crossImg.src=''
+
+        let tick1 = document.createElement('img')
+        tick1.classList.add('hidden-elem', 'tickncross')
+        tick1.setAttribute('id',`tick${Qnum1}`)
+        tick1.src="./IMAGES/TICK.png"
+        
+
+        let tick2 = document.createElement('img')
+        tick2.classList.add('hidden-elem', 'tickncross')
+        tick2.setAttribute('id',`tick${Qnum2}`)
+        tick2.src="./IMAGES/TICK.png"
+
+
+        let tick3 = document.createElement('img')
+        tick3.classList.add('hidden-elem', 'tickncross')
+        tick3.setAttribute('id',`tick${Qnum3}`)
+        tick3.src="./IMAGES/TICK.png"
+
+
+        let cross1 = document.createElement('img')
+        cross1.classList.add('shown-elem', 'tickncross')
+        cross1.setAttribute('id',`cross${Qnum1}`)
+        cross1.src="./IMAGES/CROSS.png"
+
+        let cross2 = document.createElement('img')
+        cross2.classList.add('shown-elem', 'tickncross')
+        cross2.setAttribute('id',`cross${Qnum2}`)
+        cross2.src="./IMAGES/CROSS.png"
+
+        let cross3 = document.createElement('img')
+        cross3.classList.add('shown-elem', 'tickncross')
+        cross3.setAttribute('id',`cross${Qnum3}`)
+        cross3.src="./IMAGES/CROSS.png"
+    
+        quizDiv.appendChild(para1)
+        quizDiv.appendChild(input1)
+        quizDiv.appendChild(cross1)
+        quizDiv.appendChild(tick1)
+
+        quizDiv.appendChild(para2)
+        quizDiv.appendChild(input2)
+        quizDiv.appendChild(cross2)
+        quizDiv.appendChild(tick2)
+
+        quizDiv.appendChild(para3)
+        quizDiv.appendChild(input3)
+        quizDiv.appendChild(cross3)
+        quizDiv.appendChild(tick3)
+
+        this.div.insertBefore(quizDiv,this.pointsDiv)
+
+        this.forwardBtnA.setAttribute('id',`${hidBtnForwardA}`)
+        this.forwardBtnA.classList.add('hidden-btn')
+        
+
+    }
+
+}
+
+//---------------------------------------------------------------------------------------
+
+class CanvasDiv extends TwoBtnDiv {
+
+    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list, cnvWinPara,cnvIntroPara, hidBtnBack, hidBtnForwardA, hidBtnForwardB){
+
+        super(prevPg,currentPg,nextPg,secondPg,imgPath,list,)
+        
+        this.cnvWinPara=cnvWinPara
+        this.cnvIntroPara=cnvIntroPara
+
+        this.div.removeChild(this.imgDiv)   
+        this.div.removeChild(this.textDiv) 
+
+        let gameDiv = document.createElement('div')
+        gameDiv.setAttribute('id','P6gameDiv')
+        this.gameDiv=gameDiv
+
+        let cnvBtnDiv = document.createElement('div')
+        cnvBtnDiv.setAttribute('id','cnv-and-btn-div')
+        this.cnvBtnDiv=cnvBtnDiv
+
+        let cnvWin = document.createElement('div')
+        cnvWin.setAttribute('id','canvas-win')
+        this.cnvWin=cnvWin
+
+        let cnvPara1 = document.createElement('p')
+        cnvWin.appendChild(cnvPara1)
+        cnvPara1.innerHTML=`${this.cnvWinPara}` //insert on-canvas-win para
+
+        let cnvIntro = document.createElement('div')
+        cnvIntro.setAttribute('id','canvas-intro')
+        this.cnvIntro = cnvIntro
+
+        let cnvPara2 = document.createElement('p')
+        cnvIntro.appendChild(cnvPara2)
+        cnvPara2.innerHTML=`${this.cnvIntroPara}` //intro para before canvas game
+
+        let cnv = document.createElement('canvas')
+        cnv.setAttribute('id','my-canvas')
+        cnv.width = window.innerWidth * 0.9
+        cnv.height= window.innerHeight * 0.6
+        this.cnv=cnv
+
+        this.gameDiv.appendChild(this.cnvBtnDiv)
+        this.gameDiv.appendChild(this.cnvWin)
+        this.gameDiv.appendChild(this.cnvIntro)
+        this.gameDiv.appendChild(this.cnv)
+        this.gameDiv.appendChild(this.pointsDiv)
+
+        this.div.insertBefore(this.gameDiv,this.buttonDiv)
+
+        this.buttonDiv.setAttribute('id', 'cnv-pg-btns')
+        this.buttonDiv.classList.add('canvas-div')
+
+        let swimStart = document.createElement('button')
+        swimStart.setAttribute('id','start-button')
+        swimStart.classList.add('btn-style', 'btn-cnv')
+        swimStart.innerHTML='Swim'
+        this.swimStart = swimStart
+
+        let swimRestart = document.createElement('button')
+        swimRestart.setAttribute('id','restart-btn')
+        swimRestart.classList.add('btn-style', 'btn-cnv')
+        swimRestart.innerHTML='Swim'
+        this.swimRestart=swimRestart
+
+        this.backBtn.setAttribute('id',`${hidBtnBack}`)//hiddenBtnP6Back
+        this.forwardBtnA.setAttribute('id', `${hidBtnForwardA}`)//hiddenBtnP6A
+        this.forwardBtnA.classList.add('hidden-btn')
+        this.forwardBtnB.setAttribute('id',`${hidBtnForwardB}`)//hiddenBtnP6B
+        this.forwardBtnB.classList.add('hidden-btn')
+
+        this.buttonDiv.insertBefore(this.swimStart,this.forwardBtnA)
+        this.buttonDiv.insertBefore(this.swimRestart,this.restartBtn)
+
+    }
+
+}
+
+//---------------------------------------------------------------------------------------
 
 class LastPageDiv extends OneBtnDiv{  //currentPg, nextPg, headerImg, subheaderImg,imgPath,list
 
@@ -186,16 +391,13 @@ class LastPageDiv extends OneBtnDiv{  //currentPg, nextPg, headerImg, subheaderI
 
         super(prevPg,currentPg,nextPg,imgPath,list)
 
-    
-
         this.buttonDiv.removeChild(this.backBtn)
-        this.buttonDiv.removeChild(this.restartBtn)
-        this.buttonDiv.insertBefore(this.restartBtn,this.forwardBtnA)
-
         this.forwardBtnA.innerHTML='Next'
 
     }
 }
+
+//---------------------------------------------------------------------------------------
 
 
 class LoseorWinDiv extends LastPageDiv{
@@ -210,150 +412,7 @@ class LoseorWinDiv extends LastPageDiv{
 
 }
 
-
-class QuizDiv extends OneBtnDiv{
-
-    constructor(prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpara,thirdpara){
-
-        super(prevPg,currentPg,nextPg,imgPath,list)
-
-        
-        this.firstpara=firstpara
-        this.secondpara=secondpara
-        this.thirdpara=thirdpara
-
-        this.div.removeChild(this.imgDiv)
-        
-            let quizDiv = document.createElement('div')
-            quizDiv.setAttribute('id','div-puzzle1')
-
-                let para1 = document.createElement('p')
-                para1.classList.add('quiz-p')
-                para1.innerHTML=firstpara
-
-                let input1 = document.createElement('input')
-                input1.classList.add('quiz-input')
-                input1.setAttribute('type','text')
-                input1.setAttribute('placeholder','Type here')
-
-                let para2 = document.createElement('p')
-                para2.classList.add('quiz-p')
-                para2.innerHTML=secondpara
-
-                let input2 = document.createElement('input')
-                input2.classList.add('quiz-input')
-                input2.setAttribute('type','text')
-                input2.setAttribute('placeholder','Type here')
-
-                let para3 = document.createElement('p')
-                para3.classList.add('quiz-p')
-                para3.innerHTML=thirdpara
-
-                let input3 = document.createElement('input')
-                input3.classList.add('quiz-input')
-                input3.setAttribute('type','text')
-                input3.setAttribute('placeholder','Type here')
-
-            quizDiv.appendChild(para1)
-            quizDiv.appendChild(input1)
-            quizDiv.appendChild(para2)
-            quizDiv.appendChild(input2)
-            quizDiv.appendChild(para3)
-            quizDiv.appendChild(input3)
-
-        this.div.insertBefore(quizDiv,this.pointsDiv)
-
-    }
-
-}
-
-
-
-class CanvasDiv extends TwoBtnDiv {
-
-    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list, cnvWinPara,cnvIntroPara){
-
-        super(prevPg,currentPg,nextPg,secondPg,imgPath,list,)
-        
-        this.cnvWinPara=cnvWinPara
-        this.cnvIntroPara=cnvIntroPara
-
-        this.div.removeChild(this.imgDiv)   
-        this.div.removeChild(this.textDiv) 
-
-            let gameDiv = document.createElement('div')
-            gameDiv.setAttribute('id','P6gameDiv')
-            this.gameDiv=gameDiv
-
-                let cnvBtnDiv = document.createElement('div')
-                cnvBtnDiv.setAttribute('id','cnv-and-btn-div')
-                this.cnvBtnDiv=cnvBtnDiv
-
-                let cnvWin = document.createElement('div')
-                cnvWin.setAttribute('id','canvas-win')
-                this.cnvWin=cnvWin
-
-                    let cnvPara1 = document.createElement('p')
-                    cnvWin.appendChild(cnvPara1)
-                    cnvPara1.innerHTML=`${this.cnvWinPara}` //insert on-canvas-win para
-
-                let cnvIntro = document.createElement('div')
-                cnvIntro.setAttribute('id','canvas-intro')
-                this.cnvIntro = cnvIntro
-
-                    let cnvPara2 = document.createElement('p')
-                    cnvIntro.appendChild(cnvPara2)
-                    cnvPara2.innerHTML=`${this.cnvIntroPara}` //intro para before canvas game
-
-                let cnv = document.createElement('canvas')
-                cnv.setAttribute('id','my-canvas')
-                cnv.width = '340'
-                cnv.height= '350'
-                this.cnv=cnv
-
-            this.gameDiv.appendChild(this.cnvBtnDiv)
-            this.gameDiv.appendChild(this.cnvWin)
-            this.gameDiv.appendChild(this.cnvIntro)
-            this.gameDiv.appendChild(this.cnv)
-
-        this.div.insertBefore(this.gameDiv,this.pointsDiv)
-
-        this.buttonDiv.setAttribute('id', 'cnv-pg-btns')
-        this.buttonDiv.classList.add('canvas-div')
-
-            let swimStart = document.createElement('button')
-            swimStart.setAttribute('id','start-button')
-            swimStart.classList.add('btn-style', 'btn-cnv')
-            swimStart.innerHTML='Swim'
-            this.swimStart = swimStart
-
-            let swimRestart = document.createElement('button')
-            swimRestart.setAttribute('id','restart-btn')
-            swimRestart.classList.add('btn-style', 'btn-cnv')
-            swimRestart.innerHTML='Swim'
-            this.swimRestart=swimRestart
-
-            this.backBtn.setAttribute('id','hiddenBtnP6Back')
-            this.forwardBtnA.setAttribute('id', 'hiddenBtnP6A')
-            this.forwardBtnA.classList.add('hidden-btn')
-            this.forwardBtnB.setAttribute('id','hiddenBtnP6B')
-            this.forwardBtnB.classList.add('hidden-btn')
-
-        this.buttonDiv.insertBefore(this.swimStart,this.forwardBtnA)
-        this.buttonDiv.insertBefore(this.swimRestart,this.restartBtn)
-
-    }
-
-}
-
-
-
-
-
-
-
-
-
+//---------------------------------------------------------------------------------------
 
 
 class EndDiv extends OneBtnDiv{
@@ -423,19 +482,25 @@ let P3 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
 
 )
 
-let P4 = new QuizDiv( //prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpara,thirdpara
+let P4 = new QuizDiv( //prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpara,thirdpara, Qnum1,Qnum2,Qnum3, hidBtnForwardA,inp1Length, inp2Length, inp3Length
     
     3, 4, 5,
 
     null,
 
-    `<li>Having completed the quiz, a crack appears on the wall next to the quiz. Should Polly head back the way she came or A: try to make her way through the crack?</li>`,
+    `<li>Complete the quiz to activate the forward button. A crack appears on the wall upon completion. Should Polly head back or A: make her way through the crack?</li>`,
 
     `What is the name of the largest species of penguins on Earth?`,
 
     `Where are these penguins found?`,
 
-    `How do penguins keep warm? They:`
+    `How do penguins keep warm? They:`,
+
+    1,2,3,
+
+    "hiddenBtnP4A",
+
+    7,10,6
 
 )
 
@@ -448,24 +513,29 @@ let P5 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
     `<li>When Polly emerged from the other side of the crack she found herself in a rocky cavern.</li>
     <li>Bits of penguin feathers on the floor made her realise that her friends had taken shelter here from the blizzard.</li>
     <li>She walked deeper into the cavern and found an underground river flowing at the end of it.</li>
-    <li>"They must have swam out through here", Polly thought. Should she go back the way she came, or A: jump into the river?</li>
+    <li>"They must have swam out through here", Polly thought. Should she go back, or A: jump into the river?</li>
     <li>Note: If she jumps in, she will surely encounter predators.</li>`
 
 )
 
-let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg, imgPath,list,cnvWinPara,cnvIntroPara 
+let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,cnvWinPara,cnvIntroPara,hidBtnBack,hidBtnForwardA,hidBtnForwardB 
 
     5,6,7,37,null,null,
 
     `YOU MADE IT!!! Do you still want Polly to go back the way she came?
     Or A: continue on in search of her friends, or B: roam around aimlessly?`,
 
-    `Click 'Swim' and tap anywhere on the game window to help Polly get past dangerous predators and activate the next stage of the adventure! <br>
-    You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get 20 points. <br>Otherwise, you get negative points and you lose the game.`
+    `Click 'Swim' and tap anywhere on the game window aside from the buttons to help Polly get past dangerous predators and activate the next stage of the adventure! <br>
+    You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get 20 points. <br>Otherwise, you get negative points and you lose the game.`,
 
+    "hiddenBtnP6Back",
 
+    "hiddenBtnP6A",
+    
+    "hiddenBtnP6B"
 
 )
+
 
 let P7 = new OneBtnDiv ( //prevPg,currentPg,nextPg,imgPath,list
 
@@ -474,22 +544,28 @@ let P7 = new OneBtnDiv ( //prevPg,currentPg,nextPg,imgPath,list
     './IMAGES/7.IMG.jpg',
 
     `<li>"Phew!", thought Polly. That was a close call! She was lucky to be alive!</li>
-    <li>The river carried her out of the underground system and into daylight. To her delight, she spotted her friends in the distance. She crawled out onto the icy bank and began to waddle towards her friends in the distance.But there was one more hurdle to overcome. </li>   
+    <li>The river carried her out of the underground system and into daylight. To her delight, she spotted her friends in the distance. She crawled out onto the icy bank and began to waddle towards her friends in the distance.But there was one more hurdle. </li>   
     <li>Has Polly had enough for the day? Should she head back and try a different route, or A: should she go ahead and face the next hurdle?</li>
 `
 )
 
-let P8 = new QuizDiv( //prevPg,currentPg,nextPg, imgPath, list,firstpara,secondpara,thirdpara
-
+let P8 = new QuizDiv( //prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpara,thirdpara, Qnum1,Qnum2,Qnum3,hidBtnForwardA, inp1Length, inp2Length, inp3Length
+    
     7,8,9, null,
 
     `<li>Surely its time for Polly to run back, or A: does she still want to brave it? </li>`,
 
     `Antarctic wolves are white in colour. What is the name given to the ability of animals to blend in with their surroundings?`,
 
-    `Wolves are ancestors of:`,
+    `Wolves are ancestors of what domestic animal?`,
 
-    `Wolves travel in groups called:`
+    `Wolves travel in groups called:`,
+
+    4,5,6,
+
+    "hiddenBtnP8A",
+
+    10,3,5
 
 )
 
@@ -499,7 +575,7 @@ let P9 = new TwoBtnDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list
 
     './IMAGES/9.IMG.jpg',
 
-    `<li>Luckily, Mr Wolf was distracted by something and did not spot Polly sneaking past it</li>
+    `<li>Luckily, Mr Wolf was distracted by something and did not spot Polly.</li>
     <li>At long last Polly was able to join her friends who screeched in joy at seeing their friend alive and well.</li>
     <li>Polly did not find any gold or diamond on her dangerous adventure but she found the greatest treasure of all: her friends. </li>
     <li>Does Polly still wish to go back the way she came, or A: join her friends on a new adventure, or B: wave her friends goodbye as they continue on their way.></li>

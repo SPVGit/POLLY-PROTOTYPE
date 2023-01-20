@@ -350,11 +350,13 @@ function checkGameOver(){
                 } 
 
                 else if(newBird.crashWith(finishingLine)){ //colliding against finishing line
+                    
                     setTimeout(function(){
+                      disableKeys()
                       stopGame()
                       updateScore("finishingLine",currentScore)
                       onWinCanvas()
-                    },1200)  
+                    },800)  
                 }  
             }   
         }
@@ -384,19 +386,28 @@ function updateScore(obstacle,score){
 function keyOperation(){ 
 
     p6gameDiv.onclick=(()=>{ //for tapping on mobile screen
-      newBird.speedY-=2.5
+      newBird.speedY-=2
       bubbleSounds.play()
     })
 
     document.onkeydown = function (e) {  //space bar function for larger screens
       if (e.keyCode == 32) {
         e.preventDefault();
-          newBird.speedY-=2.5
+          newBird.speedY-=2
           bubbleSounds.play()
       }
     }
 
 }
+
+function disableKeys(){
+  document.onkeydown = function (e) {  //space bar function for larger screens
+    if (e.keyCode == 32) {
+       return false
+    }
+  }
+}
+
 
 //-----------------------------------------------------------------------------------------------------------------------
 

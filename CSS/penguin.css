@@ -7,6 +7,9 @@
         font-family: 'Comic Neue';
         font-size: 22px;
         overflow-x: hidden;
+        width:  100%;
+        height: 100%;
+         margin: 0;
 
     }
     body{
@@ -30,7 +33,7 @@
         justify-content: center; 
         margin-top: 10%;
         margin-right: 1%;  
-        
+
     }
     #heading{
         
@@ -68,7 +71,6 @@
         margin-top: 20%;
 
     }
-   
     .story{
 
         display: none;
@@ -86,11 +88,9 @@
         border-radius: 10%; 
     
     }
-
     .img-div{
 
         margin-top: -2%;
-       
         margin-left:2%;  
         width:90%;
         display: flex;
@@ -107,6 +107,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center; 
+
     }
     .penguin{
 
@@ -119,7 +120,6 @@
         box-shadow: 2px 2px grey;
 
     }
-   
     ol{
 
         margin-right:5%;
@@ -141,7 +141,7 @@
  
     li{
 
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         list-style:circle;
         font-weight: bold;
 
@@ -211,11 +211,12 @@
     }
     .points-div{
 
-        
+        margin-top: 2%;
         width:100%;
         display: flex;
         flex-direction: column;
         align-items: center; 
+        
           
     }
     #div-puzzle1{
@@ -249,7 +250,7 @@
         width:60%;
         border-radius:10%;
         margin-bottom:1%;
-
+        
     }
     span{
 
@@ -277,7 +278,6 @@
         box-shadow: 2px 2px grey;
   
     }
-
     #start-button{
 
        margin-top:5%;
@@ -287,6 +287,16 @@
 
         display: none;
         
+    }
+    .hidden-elem{
+
+        display:none;
+
+    }
+    .shown-elem{
+
+        display:flex;
+  
     }
     #canvas-win{
 
@@ -336,13 +346,24 @@
         margin-bottom: 10%;
 
     }
- 
     .face{
        
         background: #bdc3c7;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #bdc3c7, white);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #bdc3c7, white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
+    #P6gameDiv{
+        margin-bottom: -15%;
+        padding: bottom 15%;
+        height:80vh
+    }
+    .tickncross{
+
+        height:18px;
+        width:18px;
+        
+    }
+    
 }
 
 /*--------LOW RESOLUTION TABLETS & IPADS-----------------------------------------------------*/

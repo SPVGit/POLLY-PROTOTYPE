@@ -1,19 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  //localStorage.setItem('currentItem', element.id);
 //localStorage.removeItem('myCat');
 /*if(item.classList.contains("P-INTRO")){
@@ -21,10 +7,6 @@
     stopAudio(backgroundAudio)
    
     location.reload();*/
-
-
-
-
 
 
 //LOCAL STORAGE------------------------------------------------------------------------------------------------
