@@ -164,18 +164,18 @@ const backgroundImg =  new BackgroundImg (canvas.width, canvas.height, img, 0, 0
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const newBird = new Bird (60, 60, img1,50, 100, 0, 0, 0.05, 0);
+const newBird = new Bird (canvas.width/7, canvas.height/7, img1,50, 100, 0.05, 0, 0.05, 0);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
 let obsWidth, obsHeight, obsPosX, obsPosY, obsSpeedX, obsSpeedY
 
-obsWidth = 120  
-obsHeight = 80
+obsWidth = canvas.width/3
+obsHeight = canvas.height/5
 obsPosX=canvas.width
 obsPosY=Math.floor(Math.random()*canvas.height)
-obsSpeedX=-1.5
-obsSpeedY=-0.2   
+obsSpeedX=-canvas.width/260
+obsSpeedY=-canvas.height/1750   
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -183,11 +183,13 @@ let topObstacleArr = []
 
 for (let i=0;i<5;i++){ 
   topObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), 0, obsSpeedX, obsSpeedY*-1)
   )
-  topObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4)
-  )
+  setTimeout(function(){
+    topObstacleArr.push(
+      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), 0, obsSpeedX, obsSpeedY*-1)
+    )
+  },34000)
   
 }
 
@@ -198,17 +200,19 @@ let bottomObstacleArr=[]
 for (let i=0;i<5;i++){
 
   bottomObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), canvas.height, obsSpeedX, obsSpeedY)
   )
-  bottomObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8)
-  )
- 
+  setTimeout(function(){
+    bottomObstacleArr.push(
+      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), canvas.height, obsSpeedX, obsSpeedY)
+    )
+  },34000)
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const finishingLine = new FinishingLine (30, canvas.height, "yellow", 2500, 0, obsSpeedX, 0, 0, 0)
+const finishingLine = new FinishingLine (30, canvas.height, "yellow", 5000, 0, obsSpeedX, 0, 0, 0)
 
 //FUNCTIONS---------------------------------------------------------------------------------------------------------------
 
@@ -276,20 +280,16 @@ function restartGame(){
 
         for (let i=0;i<5;i++){ 
           topObstacleArr.push(
-          new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1.2, 0, 0)
+          new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+(i*400), 0, obsSpeedX, obsSpeedY*-1, 0, 0)
           )
-          topObstacleArr.push(
-            new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), 0, obsSpeedX+0.4, obsSpeedY*-1.4, 0, 0)
-          )  
+
         }
 
         for (let i=0;i<5;i++){
           bottomObstacleArr.push(
            new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+(i*400), canvas.height, obsSpeedX, obsSpeedY, 0, 0)
           )
-          bottomObstacleArr.push(
-           new ObstaclesImg(obsWidth, obsHeight, img2, obsPosX+((i*400)+2000), canvas.height, obsSpeedX+0.8, obsSpeedY*0.8, 0, 0)
-          )        
+      
         }  
 
 }
@@ -386,14 +386,14 @@ function updateScore(obstacle,score){
 function keyOperation(){ 
 
     p6gameDiv.onclick=(()=>{ //for tapping on mobile screen
-      newBird.speedY-=2
+      newBird.speedY-=canvas.height/250
       bubbleSounds.play()
     })
 
     document.onkeydown = function (e) {  //space bar function for larger screens
       if (e.keyCode == 32) {
         e.preventDefault();
-          newBird.speedY-=2
+          newBird.speedY-=canvas.height/250
           bubbleSounds.play()
       }
     }
@@ -401,6 +401,9 @@ function keyOperation(){
 }
 
 function disableKeys(){
+
+  p6gameDiv.onclick=null
+
   document.onkeydown = function (e) {  //space bar function for larger screens
     if (e.keyCode == 32) {
        return false

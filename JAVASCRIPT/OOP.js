@@ -525,8 +525,7 @@ let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,cnvWinP
     `YOU MADE IT!!! Do you still want Polly to go back the way she came?
     Or A: continue on in search of her friends, or B: roam around aimlessly?`,
 
-    `Click 'Swim' and tap anywhere on the game window aside from the buttons to help Polly get past dangerous predators and activate the next stage of the adventure! <br>
-    You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get 20 points. <br>Otherwise, you get negative points and you lose the game.`,
+    `Click 'Swim' and tap anywhere on the game window aside from the buttons, or if using a laptop, use your spacebar to help Polly get past dangerous predators and activate the next stage of the adventure! You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get 20 points. Otherwise, you get negative points and you lose the game.`,
 
     "hiddenBtnP6Back",
 
