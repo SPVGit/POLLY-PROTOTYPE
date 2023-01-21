@@ -1,7 +1,11 @@
 
+//OOP USED TO CREATE A SUPER-CLASS AND SUB-CLASSES WHICH BUILD THE VARIOUS PAGES. 
+//DATA INPUT INTO THE CAN BE FOUND IN THE OOP-DATA.JS FILE
+
+
 //SUPER CLASS---------------------------------------------------------------------------
 
-class OneBtnDiv {
+class OneBtnDiv { 
 
     constructor(prevPg,currentPg,nextPg,imgPath,list) {
 
@@ -96,7 +100,7 @@ class OneBtnDiv {
 
 //SUBCLASSES------------------------------------------------------------------------------------
 
-class IntroDiv extends OneBtnDiv{
+class IntroDiv extends OneBtnDiv{ 
 
     constructor(currentPg, nextPg, headerImg, subheaderImg,imgPath,list){
 

@@ -1,4 +1,6 @@
 
+//CANVAS LOGIC------------------------------------------------------------------------------------------------------------------
+
 //ELEMENT INITIALIZATION--------------------------------------------------------------------------------------------------------
 
 let canvasIntro = document.getElementById('canvas-intro')
@@ -189,7 +191,7 @@ for (let i=0;i<5;i++){
     topObstacleArr.push(
       new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), 0, obsSpeedX, obsSpeedY*-1)
     )
-  },31000)
+  },36000)
   
 }
 
@@ -206,7 +208,7 @@ for (let i=0;i<5;i++){
     bottomObstacleArr.push(
       new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), canvas.height, obsSpeedX, obsSpeedY)
     )
-  },31000)
+  },36000)
 
 }
 
@@ -395,6 +397,7 @@ function keyOperation(){
         e.preventDefault();
           newBird.speedY-=canvas.height/250
           bubbleSounds.play()
+          bubbleSounds.volume = 0.1
       }
     }
 

@@ -1,6 +1,8 @@
 
+// MAIN GAME LOGIC---------------------------------------------------------------------------------------------
+ 
 
- //localStorage.setItem('currentItem', element.id);
+//localStorage.setItem('currentItem', element.id);
 //localStorage.removeItem('myCat');
 /*if(item.classList.contains("P-INTRO")){
     pointsArray.forEach(span=>span.innerHTML=0)
@@ -65,7 +67,7 @@ function playAudio(audio,btn) {
 
     if(btn.id==="P-1btn")
     audio.play();
-
+    audio.volume = 0.1;
 }
 
 function stopAudio(audio){
