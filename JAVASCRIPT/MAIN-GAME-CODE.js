@@ -19,7 +19,12 @@ window.addEventListener("load", (event) => {
    // localStorage.getItem('currentItem')
     //console.log(localStorage.getItem('currentItem'));
     
+
+
   });
+  
+
+
 
 //DIVS, BUTTONS AND POINTS ARRAYS------------------------------------------------------------------------------
 
@@ -68,6 +73,7 @@ function playAudio(audio,btn) {
     if(btn.id==="P-1btn")
     audio.play();
     audio.volume = 0.1;
+   
 }
 
 function stopAudio(audio){
@@ -77,6 +83,7 @@ function stopAudio(audio){
     audio.src = ""
     
 }
+
 
 function pointsCalculator(btn,el){
 

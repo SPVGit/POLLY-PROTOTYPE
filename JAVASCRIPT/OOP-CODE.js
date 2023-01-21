@@ -5,6 +5,11 @@
 
 //SUPER CLASS---------------------------------------------------------------------------
 
+    
+  
+
+
+
 class OneBtnDiv { 
 
     constructor(prevPg,currentPg,nextPg,imgPath,list) {
@@ -345,6 +350,7 @@ class CanvasDiv extends TwoBtnDiv {
         cnvIntro.appendChild(cnvPara2)
         cnvPara2.innerHTML=`${this.cnvIntroPara}` //intro para before canvas game
 
+        
         let cnv = document.createElement('canvas')
         cnv.setAttribute('id','my-canvas')
         cnv.width = window.innerWidth * 0.9
@@ -422,6 +428,8 @@ class LoseorWinDiv extends LastPageDiv{
 class EndDiv extends OneBtnDiv{
 
 }
+
+
 
 
 let introDiv = new IntroDiv ( //currentPg, nextPg, headerImg, subheaderImg,imgPath,list

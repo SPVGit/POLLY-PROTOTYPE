@@ -16,10 +16,9 @@ let pLose = document.getElementById("P-LOSE")
 let canvasDiv = document.getElementById('cnv-and-btn-div')
 let canvasBtnDiv=document.getElementById('canvas-btns')
 let p6gameDiv=document.getElementById('P6gameDiv')
-const canvas = document.getElementById('my-canvas');
-const ctx = canvas.getContext('2d');
-
-
+let canvas = document.getElementById('my-canvas');
+let ctx = canvas.getContext('2d');
+  
 //IMAGE INITIALIZATION-----------------------------------------------------------------------------------------------------------------------
 
 const img = new Image();
@@ -76,6 +75,8 @@ class Component {
   }
 
 }
+
+//extra margins added/removed 'crashWith' function to compensate for transparent backgrounds of png files.
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -158,8 +159,6 @@ class Bird extends Component {
   
 }
 
-//extra margins added/removed 'crashWith' function to compensate for transparent backgrounds of png files.
-
 //-----------------------------------------------------------------------------------------------------------------------
 
 const backgroundImg =  new BackgroundImg (canvas.width, canvas.height, img, 0, 0, 1, 0)
@@ -175,7 +174,7 @@ let obsWidth, obsHeight, obsPosX, obsPosY, obsSpeedX, obsSpeedY
 obsWidth = canvas.width/3
 obsHeight = canvas.height/5
 obsPosX=canvas.width
-obsPosY=Math.floor(Math.random()*canvas.height)
+obsPosY=canvas.height
 obsSpeedX=-canvas.width/260
 obsSpeedY=-canvas.height/1750   
 
@@ -185,11 +184,11 @@ let topObstacleArr = []
 
 for (let i=0;i<5;i++){ 
   topObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), 0, obsSpeedX, obsSpeedY*-1)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY*0, obsSpeedX, obsSpeedY*-1)
   )
   setTimeout(function(){
     topObstacleArr.push(
-      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), 0, obsSpeedX, obsSpeedY*-1)
+      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY*0, obsSpeedX, obsSpeedY*-1)
     )
   },36000)
   
@@ -202,11 +201,11 @@ let bottomObstacleArr=[]
 for (let i=0;i<5;i++){
 
   bottomObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), canvas.height, obsSpeedX, obsSpeedY)
+    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY, obsSpeedX, obsSpeedY)
   )
   setTimeout(function(){
     bottomObstacleArr.push(
-      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), canvas.height, obsSpeedX, obsSpeedY)
+      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY, obsSpeedX, obsSpeedY)
     )
   },36000)
 
@@ -326,6 +325,7 @@ function checkGameOver(){
     if ((newBird.y+newBird.height>=canvas.height) || newBird.y<0) {  //colliding against sides of canvas
         newBird.hitBottom()
         newBird.fill= img3
+        disableKeys()
         stopGame()
         setTimeout(function(){
             updateScore("side",currentScore)
@@ -342,6 +342,7 @@ function checkGameOver(){
 
                 if(newBird.crashWith(item) ||(newBird.crashWith(element))){ 
                     newBird.fill= img3
+                    disableKeys()
                     updateScore(itemNumber,currentScore)
                     updateScore(elementNumber,currentScore)
                     stopGame()
@@ -455,10 +456,12 @@ function onWinCanvas(){
 
 //-----------------------------------------------------------------------------------------------------------------------
 
+
+
 window.onload = function() {
 
       onloadCanvas()
-
+   
       startBtn.onclick = function() {
         
         keyOperation()
@@ -473,5 +476,6 @@ window.onload = function() {
 
     }
 }
+  
 //-----------------------------------------------------------------------------------------------------------------------
- 
+
