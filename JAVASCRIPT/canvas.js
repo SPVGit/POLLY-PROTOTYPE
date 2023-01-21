@@ -189,7 +189,7 @@ for (let i=0;i<5;i++){
     topObstacleArr.push(
       new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), 0, obsSpeedX, obsSpeedY*-1)
     )
-  },34000)
+  },31000)
   
 }
 
@@ -206,13 +206,13 @@ for (let i=0;i<5;i++){
     bottomObstacleArr.push(
       new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), canvas.height, obsSpeedX, obsSpeedY)
     )
-  },34000)
+  },31000)
 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const finishingLine = new FinishingLine (30, canvas.height, "yellow", 5000, 0, obsSpeedX, 0, 0, 0)
+const finishingLine = new FinishingLine (30, canvas.height, "yellow", 3500, 0, obsSpeedX, 0, 0, 0)
 
 //FUNCTIONS---------------------------------------------------------------------------------------------------------------
 

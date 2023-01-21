@@ -740,7 +740,7 @@
 
 /*--------TABLET IPADS POTRAIT MODE---------------------------------------------------*/
 
-@media only screen and (min-width: 768px) and (max-width:1024px){
+@media only screen and (min-width: 768px) and (max-width:1023px){
 
     html{
 
@@ -1000,6 +1000,7 @@
     }
     .quiz-input{
 
+        font-size: 0.9rem;
         height:30px;
         width:60%;
         border-radius:10%;
@@ -1059,7 +1060,7 @@
         border-radius:10%;
         padding: 5%;
         margin:5%;
-        font-size:0.8rem;
+        font-size:1.2rem;
         display:none;
         box-shadow: 2px 2px grey;
 
@@ -1073,7 +1074,7 @@
         display:none;
         padding: 5%;
         margin:5%;
-        font-size:0.8rem;
+        font-size:1.2rem;
         box-shadow: 2px 2px grey;
 
     }
@@ -1119,6 +1120,7 @@
 
 }
 
-@media only screen and (min-width: 1025px) and (max-width:1200px){}
+
+
 
 
