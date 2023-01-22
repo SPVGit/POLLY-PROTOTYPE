@@ -162,7 +162,7 @@ const backgroundImg =  new BackgroundImg (canvas.width, canvas.height, img, 0, 0
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const newBird = new Bird (canvas.width/7, canvas.height/7, img1,50, 100, 0.05, 0, 0.05, 0);
+const newBird = new Bird (canvas.width/7, canvas.height/7, img1,50, 100, 0.05, 0, canvas.height/8000, 0);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -172,49 +172,53 @@ obsWidth = canvas.width/3
 obsHeight = canvas.height/5
 obsPosX=canvas.width
 obsPosY=canvas.height
-obsSpeedX=-canvas.width/260
-obsSpeedY=-canvas.height/1750   
+obsSpeedX=-1
+obsSpeedY=-0.25   
 
 //-----------------------------------------------------------------------------------------------------------------------
 
 let topObstacleArr = []
-
-for (let i=0;i<5;i++){ 
-  topObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY*0, obsSpeedX, obsSpeedY*-1)
-  )
-}
-for (let i=0;i<5;i++){ 
-  setTimeout(function(){
-    topObstacleArr.push(
-      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY*0, obsSpeedX, obsSpeedY*-1)
-    )
-  },36000)
-  
-}
-
-//-----------------------------------------------------------------------------------------------------------------------
-
 let bottomObstacleArr=[]
 
-for (let i=0;i<5;i++){
+function createObstacleArray(){
 
-  bottomObstacleArr.push(
-    new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY, obsSpeedX, obsSpeedY)
-  )
-} 
-for (let i=0;i<5;i++){
-  setTimeout(function(){
-    bottomObstacleArr.push(
-      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY, obsSpeedX, obsSpeedY)
+  for (let i=0;i<5;i++){ 
+   
+    topObstacleArr.push(
+      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*canvas.width*0.72), obsPosY*0, obsSpeedX, obsSpeedY*-1)
     )
-  },36000)
+  }
+  for (let i=0;i<5;i++){ 
+    setTimeout(function(){
+     
+      topObstacleArr.push(
+        new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*canvas.width*0.72), obsPosY*0, obsSpeedX, obsSpeedY*-1)
+      )
+    },canvas.width*60.78) 
+  }
+  for (let i=0;i<5;i++){
+  
+    
+    bottomObstacleArr.push(
+      new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*canvas.width*0.72), obsPosY, obsSpeedX, obsSpeedY)
+    )
+  } 
+  for (let i=0;i<5;i++){
+    setTimeout(function(){
+   
+      
+      bottomObstacleArr.push(
+        new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*canvas.width*0.72), obsPosY, obsSpeedX, obsSpeedY)
+      )
+    },canvas.width*60.78)
+  }
 
 }
 
+
 //-----------------------------------------------------------------------------------------------------------------------
 
-const finishingLine = new FinishingLine (30, canvas.height, "yellow", 3500, 0, obsSpeedX, 0)
+const finishingLine = new FinishingLine (30, canvas.height, "yellow", canvas.width*8, 0, obsSpeedX, 0)
 
 //FUNCTIONS---------------------------------------------------------------------------------------------------------------
 
@@ -266,6 +270,7 @@ function startGame() {
     
   updateCanvas()
   updateNewBird()
+  createObstacleArray()
   updateNewObstacles()
   checkGameOver()
 
