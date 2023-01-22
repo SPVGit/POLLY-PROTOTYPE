@@ -1,9 +1,9 @@
 
-/*--------MOBILE ITERATION-----------------------------------------------------------*/
 
-@media screen and (orientation: landscape){
+/*--------LANDSCAPE MODE---------------------------------------------------*/
+
+@media screen and (max-width:1200px) and (orientation: landscape){
     
-
     html{
 
         font-family: 'Comic Neue';
@@ -27,18 +27,16 @@
         overflow-x: hidden!important
 
     }
-
     div{
 
        display:none;
        
     }
-
     #orientation{
 
         height:100vh;
         width:100vw;
-        display:block;
+        display:flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -51,15 +49,16 @@
         border-radius: 10%; 
 
     }
-
     #orientation p{
 
         text-align: center;
-        margin-top: 25%;
+        font-size: 1.5rem;
 
     }
    
 }
+
+/*--------MOBILE ITERATION-----------------------------------------------------------*/
 
 @media screen and (max-width: 480px) and (orientation: portrait){
     html{
@@ -399,8 +398,7 @@
         margin-bottom: 10%;
 
     }
-    #text-div{
-       
+    #text-div{       
       
         margin-bottom: 10%;
 
@@ -423,11 +421,23 @@
         
     }
     #orientation{
+        
         display:none;
+        
     }
-    
-}
+    #large-screen{
 
+        display: none;
+
+    }
+    .end-Image{
+
+        width:60px;
+        height:60px;
+        border-width: 5px;
+
+    }
+}
 
 /*--------LOW RESOLUTION TABLETS & IPADS-----------------------------------------------------*/
 
@@ -797,9 +807,24 @@
         width:18px;
         
     }
-    
-}
+    #orientation{
+        
+        display:none;
 
+    }
+    #large-screen{
+
+        display: none;
+
+    }
+    .end-Image{
+
+        width:100px;
+        height:100px;
+        border-width: 7.5;
+
+    }
+}
 
 /*--------TABLET IPADS POTRAIT MODE---------------------------------------------------*/
 
@@ -872,7 +897,7 @@
     
     .story{
 
-        display: none;
+        display:none;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center; 
@@ -1180,17 +1205,98 @@
         width:18px;
         
     }
+    #orientation{
+        
+        display:none;
+        
+    }
+    #large-screen{
+
+        display: none;
+
+    }
+    .end-Image{
+
+        width:150px;
+        height:150px;
+
+    }
 
 }
 
-@media only screen and (min-width:1024px) and (orientation: portrait){
+/*--------MEDIUM AND LARGE SCREEN---------------------------------------------------*/
+
+@media only screen and (min-width:1201px) {
 
     body{
 
         display: none;
 
     }
+    html{
+
+        font-family: 'Comic Neue';
+        font-size: 22px;
+        overflow-x: hidden;
+        width:  100%;
+        height: 100%; 
+        margin: 0;
+
+    }
+    body{
+
+        margin: 0;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        width: auto!important;
+        height: auto!important;
+        overflow-x: hidden!important
+
+    }
+    div{
+
+       display:none;
+       
+    }
+    #large-screen{
+
+        height:100vh;
+        width:100vw;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-style:solid;
+        border-color: black;
+        border-width: 15px;
+        background: #2980B9;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-radius: 10%; 
+
+    }
+    #large-screen p{
+
+        text-align: center;
+        font-size: 2rem;
+
+    }
+    #orientation{
+        
+        display:none;
+        
+    }
+    #large-screen{
+
+        display: flex;
+
+    }
+   
 }
+
 
 
 

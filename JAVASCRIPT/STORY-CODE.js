@@ -1,7 +1,6 @@
 
 // MAIN GAME LOGIC---------------------------------------------------------------------------------------------
  
-
 //localStorage.setItem('currentItem', element.id);
 //localStorage.removeItem('myCat');
 /*if(item.classList.contains("P-INTRO")){
@@ -9,7 +8,6 @@
     stopAudio(backgroundAudio)
    
     location.reload();*/
-
 
 //LOCAL STORAGE------------------------------------------------------------------------------------------------
 
@@ -22,9 +20,6 @@ window.addEventListener("load", (event) => {
 
 
   });
-  
-
-
 
 //DIVS, BUTTONS AND POINTS ARRAYS------------------------------------------------------------------------------
 
@@ -49,10 +44,7 @@ for (let i = 1; i<15; i++){
 pagesArray.unshift(new Page("INTRO"))
 pagesArray.push(new Page (`WIN`))
 pagesArray.push(new Page (`LOSE`))
-//pagesArray.push(new Page(`END`))
-
-console.log(pagesArray);
-
+pagesArray.push(new Page(`END`))
 
 //CREATING AUDIO OBJECTS---------------------------------------------------------------------------------------
 
@@ -61,10 +53,10 @@ let bubbleSounds = new Audio("BUBBLE-SOUNDS.mp3")
 
 //FUNCTIONS-----------------------------------------------------------------------------------------------------
 
-function openAndClosePage(btn,el){
+function openAndClosePage(btn,pg){
 
     btn.parentNode.parentNode.style.display="none"
-    el.div.style.display='flex'
+    pg.div.style.display='flex'
 
 }
 
@@ -84,27 +76,26 @@ function stopAudio(audio){
     
 }
 
+function pointsCalculator(btn,pg){
 
-function pointsCalculator(btn,el){
-
-    if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(el.div.id.substring(2,9))){
+    if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(pg.div.id.substring(2,9))){
         pointsArray.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+5)
     }
 
-    else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(el.div.id.substring(2,9))){
+    else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(pg.div.id.substring(2,9))){
         pointsArray.forEach((span)=>{
         span.innerHTML=parseFloat(span.innerHTML)-10
-        winOrLose(span.innerHTML,el)})
+        winOrLose(span.innerHTML,pg)})
     }
 
 }
 
-function winOrLose(score,el){
+function winOrLose(score,pg){
 
     if(score<0){ 
-        if(el.div.style.display==='flex'){
-            el.div.style.display='none'
-            pagesArray[pagesArray.length-1].div.style.display='flex'
+        if(pg.div.style.display==='flex'){
+            pg.div.style.display='none'
+            pagesArray[pagesArray.length-2].div.style.display='flex'
         }             
     }   
 
@@ -123,13 +114,13 @@ function restart(btn){
 function onGameStart(btnArr, pgsArr){
 
     for (let btn of btnArr){        
-        for(let el of pgsArr){          
-            if (btn.classList.contains(el.div.id)){   
+        for(let pg of pgsArr){          
+            if (btn.classList.contains(pg.div.id)){   
 
                 btn.onclick=function(){
 
-                    openAndClosePage(btn,el)
-                    pointsCalculator(btn,el)
+                    openAndClosePage(btn,pg)
+                    pointsCalculator(btn,pg)
                     playAudio(backgroundAudio,btn)
                     restart(btn)                   
 

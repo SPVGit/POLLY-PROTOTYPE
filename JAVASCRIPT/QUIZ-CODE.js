@@ -2,11 +2,11 @@
 
 let correctAns = 0
 
-function quizPlay(x,word,button){
+function quizPlay(quesNum,word,button){
     
-    let inputField = document.getElementById(`input${x}`)
-    let tickPic = document.getElementById(`tick${x}`)
-    let crossPic = document.getElementById(`cross${x}`)
+    let inputField = document.getElementById(`input${quesNum}`)
+    let tickPic = document.getElementById(`tick${quesNum}`)
+    let crossPic = document.getElementById(`cross${quesNum}`)
     let buttonToShow = document.getElementById(`${button}`)
       
     inputField.oninput = function(){
@@ -30,7 +30,6 @@ function quizPlay(x,word,button){
     }
 
 }
-
 
 //QUIZ P-4-------------------------------------------------------------------------------------
 

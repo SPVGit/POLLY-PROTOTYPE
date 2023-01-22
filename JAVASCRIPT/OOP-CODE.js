@@ -1,14 +1,8 @@
 
-//OOP USED TO CREATE A SUPER-CLASS AND SUB-CLASSES WHICH BUILD THE VARIOUS PAGES. 
-//DATA INPUT INTO THE CAN BE FOUND IN THE OOP-DATA.JS FILE
-
+//OOP USED TO CREATE A SUPER-CLASS AND SUB-CLASSES WHICH BUILD THE VARIOUS DIVS. 
+//DATA INPUT INTO THE CLASSES CAN BE FOUND IN THE OOP-DATA.JS FILE
 
 //SUPER CLASS---------------------------------------------------------------------------
-
-    
-  
-
-
 
 class OneBtnDiv { 
 
@@ -101,6 +95,7 @@ class OneBtnDiv {
         body.appendChild(div)
 
     }
+
 }
 
 //SUBCLASSES------------------------------------------------------------------------------------
@@ -116,9 +111,8 @@ class IntroDiv extends OneBtnDiv{
         this.nextPg=nextPg
         this.list=list
         this.imgPath=imgPath
-        let header = document.createElement('header')
-      
 
+        let header = document.createElement('header')
         let headerImg1 = document.createElement('img')
         headerImg1.setAttribute('id','heading')
         headerImg1.setAttribute('src',`${this.headerImg}`) //add header image
@@ -205,7 +199,6 @@ class QuizDiv extends OneBtnDiv{
 
         super(prevPg,currentPg,nextPg,imgPath,list)
 
-        
         this.firstpara=firstpara
         this.secondpara=secondpara
         this.thirdpara=thirdpara
@@ -307,7 +300,6 @@ class QuizDiv extends OneBtnDiv{
         this.forwardBtnA.setAttribute('id',`${hidBtnForwardA}`)
         this.forwardBtnA.classList.add('hidden-btn')
         
-
     }
 
 }
@@ -316,7 +308,7 @@ class QuizDiv extends OneBtnDiv{
 
 class CanvasDiv extends TwoBtnDiv {
 
-    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list, cnvWinPara,cnvIntroPara, hidBtnBack, hidBtnForwardA, hidBtnForwardB){
+    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list, gameDivId, canvasId, cnvWinPara,cnvIntroPara, hidBtnBack, hidBtnForwardA, hidBtnForwardB){
 
         super(prevPg,currentPg,nextPg,secondPg,imgPath,list,)
         
@@ -327,7 +319,7 @@ class CanvasDiv extends TwoBtnDiv {
         this.div.removeChild(this.textDiv) 
 
         let gameDiv = document.createElement('div')
-        gameDiv.setAttribute('id','P6gameDiv')
+        gameDiv.setAttribute('id',`${gameDivId}`)
         this.gameDiv=gameDiv
 
         let cnvBtnDiv = document.createElement('div')
@@ -352,7 +344,7 @@ class CanvasDiv extends TwoBtnDiv {
 
         
         let cnv = document.createElement('canvas')
-        cnv.setAttribute('id','my-canvas')
+        cnv.setAttribute('id',`${canvasId}`)
         cnv.width = window.innerWidth * 0.9
         cnv.height= window.innerHeight * 0.6
         this.cnv=cnv
@@ -405,6 +397,7 @@ class LastPageDiv extends OneBtnDiv{  //currentPg, nextPg, headerImg, subheaderI
         this.forwardBtnA.innerHTML='Next'
 
     }
+
 }
 
 //---------------------------------------------------------------------------------------
@@ -425,31 +418,48 @@ class LoseorWinDiv extends LastPageDiv{
 //---------------------------------------------------------------------------------------
 
 
-class EndDiv extends OneBtnDiv{
+class EndDiv extends OneBtnDiv{//prevPg,currentPg,nextPg,imgPath,imgPath2,list
+
+       constructor(prevPg,currentPg,nextPg,imgPath,imgPath2, imgPath3, list){
+
+            super(prevPg,currentPg,nextPg,imgPath,list)
+
+            this.div.setAttribute('id', `P-${currentPg}`)
+
+            this.div.removeChild(this.pointsDiv)
+            this.div.removeChild(this.textDiv)
+            this.buttonDiv.removeChild(this.forwardBtnA)
+            this.buttonDiv.removeChild(this.backBtn)
+
+            this.div.insertBefore(this.textDiv,this.imgDiv)
+
+            this.imgDiv.classList.add('space-between')
+            this.imgTag.classList.add('end-Image')
+      
+            let imgTag2 = document.createElement('img')
+            imgTag2.classList.add('penguin', 'end-Image')
+            imgTag2.src=`${imgPath2}`
+            this.imgTag2=imgTag2
+
+            this.imgDiv.appendChild(this.imgTag2)
+
+            let imgTag3 = document.createElement('img')
+            imgTag3.classList.add('penguin', 'end-Image')
+            imgTag3.src=`${imgPath3}`
+            this.imgTag3=imgTag3
+
+            this.imgDiv.appendChild(this.imgTag3)
+       }
+
+}
+
+class AltDiv extends OneBtnDiv{
+
 
 }
 
 
 
-
-let introDiv = new IntroDiv ( //currentPg, nextPg, headerImg, subheaderImg,imgPath,list
-
-    'INTRO',
-
-    1,
-
-    "./IMAGES/ADVENTURES-OF-A-PENGUIN.png",
-
-    "./IMAGES/POLLY-FINDS-A-LOST-TREASURE.png",
-
-    "./IMAGES/0.IMG-INTRO.jpg",
-
-    `<li>The aim of this game is to find a lost <br>
-    treasure and finish with positive points</li>
-    <li>Going forward earns you points</li>
-    <li>Going backwards leads to negative points</li>`
-
-)
 
 let P1 = new FirstPageDiv( //prevPg,currentPg,nextPg,imgPath,list
 
@@ -530,9 +540,9 @@ let P5 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
 
 )
 
-let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,cnvWinPara,cnvIntroPara,hidBtnBack,hidBtnForwardA,hidBtnForwardB 
+let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,gameDivId,canvasId,cnvWinPara,cnvIntroPara,hidBtnBack,hidBtnForwardA,hidBtnForwardB 
 
-    5,6,7,37,null,null,
+    5,6,7,37,null,null,'P6gameDiv','my-canvas',
 
     `YOU MADE IT!!! Do you still want Polly to go back the way she came?
     Or A: continue on in search of her friends, or B: roam around aimlessly?`,
@@ -662,9 +672,9 @@ let P14 = new LastPageDiv (//prevPg,currentPg,nextPg,imgPath,list
 
 let win = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
-    null,'WIN','',
+    null,'WIN','END',
 
-    './IMAGES/smiley-face-png-transparent-5.png',
+    './IMAGES/SMILEY-FACE.png',
 
     `<li>Yay! You are a winner!</li>
     <li>If you would like to play again and choose other paths for Polly, just click on the 'Start Again' button below.</li>
@@ -674,12 +684,24 @@ let win = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
 let lose = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
-    null,'LOSE', '',
+    null,'LOSE', 'END',
 
-    './IMAGES/sad-face-transparent-background-2.png',
+    './IMAGES/SAD-FACE.png',
 
     `<li>Unfortunately, you have lost the game. </li>           
     <li>Click on 'Restart' to go back to the beginning, or 'New Games' if you want to try out a different adventure!</li>`
 
+)
+
+let end = new EndDiv(
+
+    null, 'END', null, 
+
+    './IMAGES/0.IMG-INTRO.jpg' , './IMAGES/0.IMG-INTRO.jpg','./IMAGES/0.IMG-INTRO.jpg',
+    
+    `<li>Polly may have been lonely in her icy world, but she has many friends around the world in far off places</li>
+    <li>There's Mindy the Monkey in India, Spinkey the Spider in Australia and Elly the Elephant in Africa</li>
+    <li>Why not click on one of the links below to get to know these friends and go on wild adventures with them?</li>
+    <li>If you would like to play Polly the Penguin again, just click on 'Restart' :) ...</li>`
 
 )

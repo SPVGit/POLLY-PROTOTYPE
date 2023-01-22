@@ -7,14 +7,11 @@ let canvasIntro = document.getElementById('canvas-intro')
 let canvasWin = document.getElementById('canvas-win')
 let startBtn = document.getElementById("start-button")
 let restartBtn=document.getElementById('restart-btn')
-let gameClick =document.getElementById('game-click')
 let hiddenBtnA = document.getElementById("hiddenBtnP6A")
 let hiddenBtnB = document.getElementById("hiddenBtnP6B")
 let hiddenBtnBack = document.getElementById('hiddenBtnP6Back')
 let p6 = document.getElementById('P-6')
 let pLose = document.getElementById("P-LOSE")
-let canvasDiv = document.getElementById('cnv-and-btn-div')
-let canvasBtnDiv=document.getElementById('canvas-btns')
 let p6gameDiv=document.getElementById('P6gameDiv')
 let canvas = document.getElementById('my-canvas');
 let ctx = canvas.getContext('2d');
@@ -213,7 +210,7 @@ for (let i=0;i<5;i++){
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-const finishingLine = new FinishingLine (30, canvas.height, "yellow", 3500, 0, obsSpeedX, 0, 0, 0)
+const finishingLine = new FinishingLine (30, canvas.height, "yellow", 3500, 0, obsSpeedX, 0)
 
 //FUNCTIONS---------------------------------------------------------------------------------------------------------------
 
@@ -271,6 +268,7 @@ function startGame() {
 //-----------------------------------------------------------------------------------------------------------------------
 
 function restartGame(){
+
   topObstacleArr=[]
         bottomObstacleArr=[]
 
@@ -391,6 +389,7 @@ function keyOperation(){
     p6gameDiv.onclick=(()=>{ //for tapping on mobile screen
       newBird.speedY-=canvas.height/250
       bubbleSounds.play()
+      bubbleSounds.volume = 0.1;
     })
 
     document.onkeydown = function (e) {  //space bar function for larger screens
@@ -413,6 +412,7 @@ function disableKeys(){
        return false
     }
   }
+
 }
 
 
@@ -438,6 +438,7 @@ function duringCanvasGame(){
     startBtn.style.display="none"
     restartBtn.style.display="flex"
     hiddenBtnBack.style.display='none'
+    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------
@@ -456,18 +457,16 @@ function onWinCanvas(){
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-
-
 window.onload = function() {
 
       onloadCanvas()
    
       startBtn.onclick = function() {
-        
+     
         keyOperation()
         duringCanvasGame();
         startGame();
-        
+       
       };
 
       restartBtn.onclick=function(){
@@ -475,6 +474,7 @@ window.onload = function() {
         restartGame()
 
     }
+
 }
   
 //-----------------------------------------------------------------------------------------------------------------------
