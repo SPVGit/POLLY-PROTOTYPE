@@ -183,6 +183,8 @@ for (let i=0;i<5;i++){
   topObstacleArr.push(
     new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY*0, obsSpeedX, obsSpeedY*-1)
   )
+}
+for (let i=0;i<5;i++){ 
   setTimeout(function(){
     topObstacleArr.push(
       new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY*0, obsSpeedX, obsSpeedY*-1)
@@ -200,6 +202,8 @@ for (let i=0;i<5;i++){
   bottomObstacleArr.push(
     new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY, obsSpeedX, obsSpeedY)
   )
+} 
+for (let i=0;i<5;i++){
   setTimeout(function(){
     bottomObstacleArr.push(
       new ObstaclesImg (obsWidth, obsHeight, img2, obsPosX+(i*500), obsPosY, obsSpeedX, obsSpeedY)
@@ -244,11 +248,13 @@ function updateNewObstacles(){
         item.drawImg()
         
     }
+
     for(let item of bottomObstacleArr){
         item.newPos()
         item.drawImg()
         
     }
+
     checkGameOver()
   requestAnimationFrame(updateNewObstacles);
 
