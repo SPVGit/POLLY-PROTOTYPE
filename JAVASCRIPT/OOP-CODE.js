@@ -84,8 +84,9 @@ class OneBtnDiv {
         this.restartBtn=restartBtn
     
         buttonDiv.appendChild(backBtn)
-        buttonDiv.appendChild(forwardBtnA)
         buttonDiv.appendChild(restartBtn)
+        buttonDiv.appendChild(forwardBtnA)
+        
     
         div.appendChild(imgDiv)
         div.appendChild(pointsDiv)
@@ -186,7 +187,7 @@ class TwoBtnDiv extends OneBtnDiv{
         forwardBtnB.innerHTML='B'
         this.forwardBtnB=forwardBtnB
 
-        this.buttonDiv.insertBefore(forwardBtnB,this.restartBtn)
+        this.buttonDiv.appendChild(this.forwardBtnB)
     }
 
 }
@@ -379,7 +380,7 @@ class CanvasDiv extends TwoBtnDiv {
         this.forwardBtnB.classList.add('hidden-btn')
 
         this.buttonDiv.insertBefore(this.swimStart,this.forwardBtnA)
-        this.buttonDiv.insertBefore(this.swimRestart,this.restartBtn)
+        this.buttonDiv.appendChild(this.swimRestart)
 
     }
 
@@ -453,12 +454,19 @@ class EndDiv extends OneBtnDiv{//prevPg,currentPg,nextPg,imgPath,imgPath2,list
 
 }
 
-class AltDiv extends OneBtnDiv{
+class NoBackOneBtnDiv extends OneBtnDiv{
 
+    constructor(prevPg,currentPg,nextPg,imgPath,list){
+        
+        super(prevPg,currentPg,nextPg,imgPath,list)
 
+        this.buttonDiv.removeChild(this.backBtn)
+
+    }
+    
 }
 
-
+//---------------------------------------------------------------------------------------
 
 
 let P1 = new FirstPageDiv( //prevPg,currentPg,nextPg,imgPath,list
@@ -547,7 +555,7 @@ let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,gameDiv
     `YOU MADE IT!!! Do you still want Polly to go back the way she came?
     Or A: continue on in search of her friends, or B: roam around aimlessly?`,
 
-    `Click 'Swim' and tap anywhere on the game window aside from the buttons to help Polly get past dangerous predators and activate the next stage of the adventure! You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get 20 points. Otherwise, you get negative points and you lose the game.`,
+    `Click 'Swim' and tap anywhere on the game window aside from the buttons to help Polly get past dangerous predators and activate the next stage of the adventure! You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get lots of extra points. Otherwise, you get negative points and you lose the game.`,
 
     "hiddenBtnP6Back",
 
@@ -619,7 +627,7 @@ let P11 = new TwoBtnDiv (//prevPg,currentPg,nextPg,secondPg,imgPath,list
 
     2,11,12,15,
 
-    null,
+    './IMAGES/11.IMG.jpg',
 
     `<li>As Polly approached the dark object, she realised it was a large rock.</li>
     <li>Behind the rock was the entrance to a cave with a long tunnel</li>
@@ -633,7 +641,7 @@ let P12 = new TwoBtnDiv (//prevPg,currentPg,nextPg,secondPg,imgPath,list
 
     11,12,13,14,
 
-    null,
+    './IMAGES/12.IMG.jpg',
 
     `<li>The tunnel forked into two.</li>
     <li>The fork on the left seemed to carry on forever into the darkness while the one on the right had a spot of light at the end.</li>
@@ -646,7 +654,7 @@ let P13 = new LastPageDiv( //prevPg,currentPg,nextPg,imgPath,list
 
     12, 13,'LOSE',
 
-    null,
+    './IMAGES/13.IMG.png',
 
    `<li>Oops! Turns out it was a dead end. Also her entrance into the cave had awakened another lone penguin which was asleep in the corner</li>
    <li>The other penguin began to wrestle with Polly. It was not ready to share its territory with her. They fought to the bitter end and that was the end of that.</li>`
@@ -657,7 +665,7 @@ let P14 = new LastPageDiv (//prevPg,currentPg,nextPg,imgPath,list
 
     13,14,'WIN',
 
-    null,
+    './IMAGES/10.IMG.jpg',
 
     `<li>Polly came out into the light and realised that she had accidentally managed to find a short cut to her 
     friends who were waiting for her at the waters edge. 
@@ -668,7 +676,68 @@ let P14 = new LastPageDiv (//prevPg,currentPg,nextPg,imgPath,list
     </li>`
 
 )
+let P15 = new OneBtnDiv ( //prevPg,currentPg,nextPg,imgPath,list
 
+    11,15,16,
+
+    './IMAGES/15.IMG.jpg',
+
+    `<li>Polly walked towards the glacier. She came across a flock of penguins and screeched in excitement, but soon realised that they were not her friends.</li>
+    <li>It was a different group of penguins. They pointed Polly in towards a direction where they thought they had seen her friends</li>   
+    <li>Has Polly tired out now? Should she head back and try a different route, or A: should she go ahead and look for her friends?</li>
+`
+)
+
+let P16 = new TwoBtnDiv (//prevPg,currentPg,nextPg,secondPg,imgPath,list
+
+    15,16,18,17,
+
+    './IMAGES/16.IMG.jpg',
+
+    `<li>Polly came across the opening to an ice cave.</li>
+    <li>There also appeared to be a hole on the floor on of the glaier.</li>
+    <li>Polly wondered if the penguins she had met and referred to one of these.</li>
+    <li>Should she go back and try another route, A: head into the cave, or B: climb down the hole.</li>`
+
+)
+let P17 = new LastPageDiv (//prevPg,currentPg,nextPg,imgPath,list
+
+    16,17,'LOSE',
+
+    './IMAGES/17.IMG.jpg',
+
+    `<li>Polly decided to down the hole.</li>
+    <li>Unfortunately, this was a mistake. </li>
+    <li>She fell through the hole got lost in a maze of underground icy tunnels and was never found again.</li>`
+
+)
+
+let P18 = new OneBtnDiv(//prevPg,currentPg,nextPg,imgPath,list
+
+16,18,5.11,
+
+'./IMAGES/18.IMG.jpg',
+
+`<li>Polly entered the cave and started to walk down a tunnel which inclined downwards.</li>
+<li>It carried on for a long while and she started to get worried. </li>
+<li>Luckily she came across a crack on the wall, just big enough for her to squeeze through.</li>
+<li>Should Polly head back, or A: be curious and check out whats on the other side of the crack</li>`
+
+)
+
+let P511 = new NoBackOneBtnDiv(//prevPg,currentPg,nextPg,imgPath,list
+
+null,5.11,6,
+
+'./IMAGES/5.IMG.jpg',
+
+`<li>Unfortunately, Polly slipped through the crack and fell, losing ten points :(</li>
+<li>She panicked and tried to climb back out but it was too high up for her.She could only move forward now.</li>
+<li>Polly found an underground river flowing near by. You need to her to swim down the river </li>
+<li>Note, she is sure to encounter predators in the water.</li>`
+
+
+)
 
 let win = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
@@ -678,7 +747,7 @@ let win = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
     `<li>Yay! You are a winner!</li>
     <li>If you would like to play again and choose other paths for Polly, just click on the 'Start Again' button below.</li>
-    <li>If you with to play other similar games, click on the 'End' button below which will calculate your final score as well as give you links to new games.</li>`
+    <li>If you with to play other similar games, click on the 'End' button below whic#h will calculate your final score as well as give you links to new games.</li>`
 
 )
 
@@ -705,3 +774,4 @@ let end = new EndDiv(
     <li>If you would like to play Polly the Penguin again, just click on 'Restart' :) ...</li>`
 
 )
+

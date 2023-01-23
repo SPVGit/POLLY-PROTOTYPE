@@ -1,25 +1,13 @@
 
 // MAIN GAME LOGIC---------------------------------------------------------------------------------------------
- 
-//localStorage.setItem('currentItem', element.id);
-//localStorage.removeItem('myCat');
-/*if(item.classList.contains("P-INTRO")){
-    pointsArray.forEach(span=>span.innerHTML=0)
-    stopAudio(backgroundAudio)
-   
-    location.reload();*/
 
 //LOCAL STORAGE------------------------------------------------------------------------------------------------
 
 window.addEventListener("load", (event) => {
-    console.log("page is fully loaded");
- 
-   // localStorage.getItem('currentItem')
-    //console.log(localStorage.getItem('currentItem'));
-    
 
+    console.log(myLoad());
 
-  });
+});
 
 //DIVS, BUTTONS AND POINTS ARRAYS------------------------------------------------------------------------------
 
@@ -37,11 +25,12 @@ class Page {
     }
 }
 
-for (let i = 1; i<15; i++){
+for (let i = 1; i<19; i++){
  pagesArray.push(new Page(i))
 }
 
 pagesArray.unshift(new Page("INTRO"))
+pagesArray.push(new Page(`5.11`))
 pagesArray.push(new Page (`WIN`))
 pagesArray.push(new Page (`LOSE`))
 pagesArray.push(new Page(`END`))
@@ -53,10 +42,45 @@ let bubbleSounds = new Audio("BUBBLE-SOUNDS.mp3")
 
 //FUNCTIONS-----------------------------------------------------------------------------------------------------
 
+let setData={}
+
 function openAndClosePage(btn,pg){
 
     btn.parentNode.parentNode.style.display="none"
     pg.div.style.display='flex'
+
+    setData.pageId=pg.div.id
+    setData.btnPgId=btn.parentNode.parentNode.id
+    setData.points=pointsArray[0].innerHTML // Stores pageId as P-INTRO and points as zero on restart
+    //setData.canvasWidth = canvas.width
+    //setData.canvasHeight = canvas.height
+    mySave(setData)
+   
+}
+
+function mySave(dataObj) {
+
+    let dataKey = (JSON.stringify(dataObj))
+    localStorage.setItem(`dataKey`, dataKey)  
+
+}
+
+function myLoad() {
+
+    let storedObj = localStorage.getItem('dataKey')
+
+    if(storedObj && (JSON.parse(storedObj).pageId!==`P-INTRO`)){ //shows any open page apart from intro page
+        document.getElementById(`${JSON.parse(storedObj).pageId}`).style.display='flex'
+        document.getElementById(`${JSON.parse(storedObj).pageId}`).onclick = function(){
+            backgroundAudio.play()
+            backgroundAudio.volume = 0.2;
+        }
+        document.getElementById(`${JSON.parse(storedObj).btnPgId}`).style.display='none'
+        document.getElementById(`P-INTRO`).style.display='none'
+        pointsArray.forEach(span=>span.innerHTML=parseFloat(JSON.parse(storedObj).points))
+
+    }  
+    return storedObj
 
 }
 
@@ -64,7 +88,7 @@ function playAudio(audio,btn) {
 
     if(btn.id==="P-1btn")
     audio.play();
-    audio.volume = 0.1;
+    audio.volume = 0.2;
    
 }
 
@@ -79,15 +103,22 @@ function stopAudio(audio){
 function pointsCalculator(btn,pg){
 
     if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(pg.div.id.substring(2,9))){
-        pointsArray.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+5)
+
+        pointsArray.forEach(span=>{
+            span.innerHTML=parseFloat(span.innerHTML)+5  
+        })
+        
     }
 
     else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(pg.div.id.substring(2,9))){
+
         pointsArray.forEach((span)=>{
         span.innerHTML=parseFloat(span.innerHTML)-10
         winOrLose(span.innerHTML,pg)})
     }
-
+        setData.points=pointsArray[0].innerHTML // Stores current points
+        mySave(setData)
+        
 }
 
 function winOrLose(score,pg){
@@ -96,6 +127,9 @@ function winOrLose(score,pg){
         if(pg.div.style.display==='flex'){
             pg.div.style.display='none'
             pagesArray[pagesArray.length-2].div.style.display='flex'
+
+            setData.pageId = pagesArray[pagesArray.length-2].div.id // Stores the lose page if that is open
+            mySave(setData)
         }             
     }   
 
@@ -104,9 +138,16 @@ function winOrLose(score,pg){
 function restart(btn){
 
     if(btn.classList.contains("P-INTRO")){
-        pointsArray.forEach(span=>span.innerHTML=0)
-        stopAudio(backgroundAudio)
+
         location.reload();
+
+        pointsArray.forEach(span=>span.innerHTML=0)
+
+        stopAudio(backgroundAudio)
+
+        setData.pageId='P-INTRO'
+        setData.points=pointsArray[0].innerHTML // Stores pageId as P-INTRO and points as zero on restart
+        mySave(setData)
     }
     
 }
