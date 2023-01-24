@@ -31,7 +31,7 @@ The code for button operation to open and close different pages are found under 
 
 ## NEXT STEPS:
 
-Further modularization and optimization of OOP code. Creation of JSON file.
+Further modularization and optimization of OOP code. Creation of JSON file. Setting up local storage.
 
 ## RESOURCES:
 

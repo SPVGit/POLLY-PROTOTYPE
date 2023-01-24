@@ -753,7 +753,7 @@ let win = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
 let lose = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
-    null,'LOSE', 'END',
+    null,'LOSE','END',
 
     './IMAGES/SAD-FACE.png',
 
@@ -762,7 +762,7 @@ let lose = new LoseorWinDiv(//prevPg, currentPg,nextPg,imgPath,list
 
 )
 
-let end = new EndDiv(
+let end = new EndDiv(//prevPg, currentPg,nextPg,imgPath,list
 
     null, 'END', null, 
 

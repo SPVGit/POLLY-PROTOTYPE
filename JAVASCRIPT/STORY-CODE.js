@@ -5,8 +5,6 @@
 
 window.addEventListener("load", (event) => {
 
-    console.log(myLoad());
-
 });
 
 //DIVS, BUTTONS AND POINTS ARRAYS------------------------------------------------------------------------------
@@ -42,45 +40,15 @@ let bubbleSounds = new Audio("BUBBLE-SOUNDS.mp3")
 
 //FUNCTIONS-----------------------------------------------------------------------------------------------------
 
-let setData={}
-
 function openAndClosePage(btn,pg){
 
     btn.parentNode.parentNode.style.display="none"
     pg.div.style.display='flex'
 
-    setData.pageId=pg.div.id
-    setData.btnPgId=btn.parentNode.parentNode.id
-    setData.points=pointsArray[0].innerHTML // Stores pageId as P-INTRO and points as zero on restart
-    //setData.canvasWidth = canvas.width
-    //setData.canvasHeight = canvas.height
-    mySave(setData)
-   
-}
-
-function mySave(dataObj) {
-
-    let dataKey = (JSON.stringify(dataObj))
-    localStorage.setItem(`dataKey`, dataKey)  
-
-}
-
-function myLoad() {
-
-    let storedObj = localStorage.getItem('dataKey')
-
-    if(storedObj && (JSON.parse(storedObj).pageId!==`P-INTRO`)){ //shows any open page apart from intro page
-        document.getElementById(`${JSON.parse(storedObj).pageId}`).style.display='flex'
-        document.getElementById(`${JSON.parse(storedObj).pageId}`).onclick = function(){
-            backgroundAudio.play()
-            backgroundAudio.volume = 0.2;
-        }
-        document.getElementById(`${JSON.parse(storedObj).btnPgId}`).style.display='none'
-        document.getElementById(`P-INTRO`).style.display='none'
-        pointsArray.forEach(span=>span.innerHTML=parseFloat(JSON.parse(storedObj).points))
-
-    }  
-    return storedObj
+    console.log(btn.parentNode.parentNode);
+    console.log(pg.div);
+    
+    
 
 }
 
@@ -114,23 +82,19 @@ function pointsCalculator(btn,pg){
 
         pointsArray.forEach((span)=>{
         span.innerHTML=parseFloat(span.innerHTML)-10
-        winOrLose(span.innerHTML,pg)})
+        winOrLose(span.innerHTML,pg.div)})
     }
-        setData.points=pointsArray[0].innerHTML // Stores current points
-        mySave(setData)
         
 }
 
-function winOrLose(score,pg){
+function winOrLose(score,page){
 
     if(score<0){ 
-        if(pg.div.style.display==='flex'){
-            pg.div.style.display='none'
+        if(page.style.display==='flex'){
+            page.style.display='none'
             pagesArray[pagesArray.length-2].div.style.display='flex'
 
-            setData.pageId = pagesArray[pagesArray.length-2].div.id // Stores the lose page if that is open
-            mySave(setData)
-        }             
+        }
     }   
 
 }
@@ -140,16 +104,9 @@ function restart(btn){
     if(btn.classList.contains("P-INTRO")){
 
         location.reload();
-
         pointsArray.forEach(span=>span.innerHTML=0)
-
         stopAudio(backgroundAudio)
-
-        setData.pageId='P-INTRO'
-        setData.points=pointsArray[0].innerHTML // Stores pageId as P-INTRO and points as zero on restart
-        mySave(setData)
     }
-    
 }
 
 function onGameStart(btnArr, pgsArr){
@@ -163,7 +120,7 @@ function onGameStart(btnArr, pgsArr){
                     openAndClosePage(btn,pg)
                     pointsCalculator(btn,pg)
                     playAudio(backgroundAudio,btn)
-                    restart(btn)                   
+                    restart(btn)                 
 
                 }                                       
             }            
@@ -175,3 +132,41 @@ function onGameStart(btnArr, pgsArr){
 onGameStart(buttonsArray,pagesArray)
 
 
+//LOCAL STORAGE FEATURE - TO BE COMPLETED LATER--------------------------------------------------------------------------------
+
+//setData.pageId=pg.div.id
+// setData.btnPgId=btn.parentNode.parentNode.id
+//setData.points=pointsArray[0].innerHTML // Stores pageId as P-INTRO and points as zero on restart
+//setData.canvasWidth = canvas.width
+//setData.canvasHeight = canvas.height
+// mySave(setData)
+   
+//setData{}
+
+//function mySave(dataObj) {
+
+    //let dataKey = (JSON.stringify(dataObj))
+    //localStorage.setItem(`dataKey`, dataKey)  
+
+//}
+
+// function myLoad() {
+
+//     let storedObj = localStorage.getItem('dataKey')
+
+//     if(storedObj && (JSON.parse(storedObj).pageId!==`P-INTRO`)){ //shows any open page apart from intro page
+//         document.getElementById(`${JSON.parse(storedObj).pageId}`).style.display='flex'
+//         document.getElementById(`${JSON.parse(storedObj).pageId}`).onclick = function(){
+//             backgroundAudio.play()
+//             backgroundAudio.volume = 0.2;
+//         }
+
+//        //document.getElementById(`${JSON.parse(storedObj).btnPgId}`).style.display='none'
+//         document.getElementById(`P-INTRO`).style.display='none'
+//         pointsArray.forEach(span=>span.innerHTML=parseFloat(JSON.parse(storedObj).points))
+
+//     }  
+
+//     return storedObj
+
+// }

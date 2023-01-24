@@ -16,19 +16,6 @@ let p6gameDiv=document.getElementById('P6gameDiv');
 let canvas = document.getElementById('my-canvas');
 let ctx = canvas.getContext('2d');
 
-/*window.addEventListener("resize", canvasResize);
-
-function canvasResize(){
-
-  let w = document.documentElement.clientWidth
-  let h = document.documentElement.clientHeight
-  canvas.width = w*0.9
-  canvas.height=h*0.6
-  setData.canvasWidth = canvas.width
-  setData.canvasHeight = canvas.height
-  mySave(setData)
- 
-}*/
   
 //IMAGE INITIALIZATION-----------------------------------------------------------------------------------------------------------------------
 
@@ -193,7 +180,7 @@ obsSpeedY=-0.25;
 
 let topObstacleArr = [];
 let bottomObstacleArr=[];
-let topObsTime, bottomObsTime;
+let timeoutTime = canvas.width*60.78
 
 function createObstaclesArray(){
 
@@ -249,7 +236,7 @@ function updateNewObstacles(){
         item.drawImg(); 
     }
 
-    checkGameOver();
+    checkGameOver();  
   requestAnimationFrame(updateNewObstacles);
 
 };
@@ -261,7 +248,6 @@ function startGame() {
   updateCanvas();
   updateNewBird();
   updateNewObstacles();
-  checkGameOver();
 
 };
 
@@ -295,99 +281,76 @@ function stopGame(){
   for(let element of bottomObstacleArr){
     element.speedX=0;
     element.speedY=0;
+    
   };
-  
+
 };  
+
+
+
 
 //-----------------------------------------------------------------------------------------------------------------------
 
 function checkGameOver(){ 
-
-  let currentScore= parseFloat(pointsArray[0].innerHTML);
-
+  
     if ((newBird.y+newBird.height>=canvas.height) || newBird.y<0) {  //colliding against sides of canvas
       
         newBird.hitBottom();
         newBird.fill= img3;
+        updateScore("side",currentScore);
         disableKeys();
         stopGame();
-        setTimeout(function(){
 
-            updateScore("side",currentScore);
-            p6.style.display='none';
-            pLose.style.display='flex';  
-
-            setData.pageId=pLose.id
-            setData.points=pointsArray[0].innerHTML
-            mySave(setData)
-            
-        },500);
     }
 
-    else if ((newBird.y+newBird.height<canvas.height) || newBird.y>0) { //colliding against obstacles
+    else if ((newBird.y+newBird.height<canvas.height) || newBird.y>0) { 
 
-        for(let item of topObstacleArr){
-            let itemNumber = topObstacleArr.indexOf(item);
-            for(let element of bottomObstacleArr){
-                let elementNumber = bottomObstacleArr.indexOf(item);
+        let allObstacleArr = topObstacleArr.concat(bottomObstacleArr)
+        
+        for(let item of allObstacleArr){
 
-                if(newBird.crashWith(item) ||(newBird.crashWith(element))){ 
+            if(newBird.crashWith(item)){ //colliding against obstacles
+              newBird.fill= img3;
+              updateScore("obstacle",currentScore);
+              disableKeys();
+              stopGame();
 
-                    newBird.fill= img3;
-                    disableKeys();
-                    updateScore(itemNumber,currentScore);
-                    updateScore(elementNumber,currentScore);
+            } 
+        }
 
-                    setData.points=pointsArray[0].innerHTML
-                    mySave(setData)
-
-                    stopGame();
-                    setTimeout(function(){  
-                      
-                        p6.style.display='none';
-                        pLose.style.display='flex';
-
-                        setData.pageId=pLose.id
-                        setData.points=pointsArray[0].innerHTML
-                        mySave(setData)
-
-                    },500);  
-                } 
-
-                else if(newBird.crashWith(finishingLine)){ //colliding against finishing line
+        if(newBird.crashWith(finishingLine)){ //colliding against finishing line
                     
-                    setTimeout(function(){
+            
+                    
+            setTimeout(function(){
 
-                      disableKeys();
-                      stopGame();
-                      updateScore("finishingLine",currentScore);
-                      onWinCanvas();
+              stopGame();
+              disableKeys();
+              updateScore("finishingLine",currentScore);
+              onWinCanvas();
 
-                      setData.pageId=pLose.id
-                      setData.points=pointsArray[0].innerHTML
-                      mySave(setData)
-
-                    },800);  
-                };  
-            };  
-        };
-    };
-    
+            },800);  
+        };  
+    };  
 };
 
 //-----------------------------------------------------------------------------------------------------------------------
 
 function updateScore(obstacle,score){
     
-  if(obstacle==="side"){
-      pointsArray.forEach(span=>span.innerHTML=-5); 
+  if(obstacle==="side"||obstacle ==="obstacle"){
+      pointsArray.forEach((span)=>{
+        span.innerHTML=-5
+
+        setTimeout(function(){                        
+          winOrLose(span.innerHTML,p6)
+        },300);  
+
+      }); 
   }
-  else if(obstacle <= topObstacleArr.length){
-      pointsArray.forEach(span=>span.innerHTML=-5);   
-  }
+
   else if (obstacle==="finishingLine") {
     pointsArray.forEach(span=>span.innerHTML=score+20);
-
   };
 
 }; 
@@ -415,9 +378,9 @@ function keyOperation(){
 
 function disableKeys(){
 
-  p6gameDiv.onclick=null;
+  p6gameDiv.onclick=null;  //tapping diabled for mobiles
 
-  document.onkeydown = function (e) {  //space bar function for larger screens
+  document.onkeydown = function (e) {  //space bar diabled for larger screens
     if (e.keyCode == 32) {
        return false
     };
@@ -465,19 +428,23 @@ function onWinCanvas(){
 };
 
 //-----------------------------------------------------------------------------------------------------------------------
+let currentScore= 0;
 
 window.onload = function() {
 
       onloadCanvas();
-   
+      
       startBtn.onclick = function() {
-        
+
+        currentScore= parseFloat(pointsArray[0].innerHTML);
         keyOperation();
         duringCanvasGame();
         createObstaclesArray();
+
         obstacleTimeOut = setTimeout(function(){
           createObstaclesArray();
-        },canvas.width*60.78);
+        },timeoutTime);
+
         startGame();
        
       };
@@ -485,14 +452,42 @@ window.onload = function() {
       restartBtn.onclick=function(){
 
         clearTimeout(obstacleTimeOut);
+
         restartGame();
         createObstaclesArray();
+
         obstacleTimeOut = setTimeout(function(){
           createObstaclesArray();
-        },canvas.width*60.78);
+        },timeoutTime);
+
     };
 
 };
   
 //-----------------------------------------------------------------------------------------------------------------------
+
+window.addEventListener("resize", canvasResize);
+
+function canvasResize(){
+
+  let w = document.documentElement.clientWidth
+  let h = document.documentElement.clientHeight
+  canvas.width = w*0.9
+  canvas.height=h*0.6
+  backgroundImg.width=canvas.width
+  backgroundImg.height=canvas.height
+  newBird.width=canvas.width/7
+  newBird.height=canvas.width/7
+  newBird.speedX=canvas.width/6750,
+  newBird.gravitySpeed=canvas.height/8000
+  obsWidth = canvas.width/3;
+  obsHeight = canvas.height/5;
+  obsPosX=canvas.width;
+  obsPosY=canvas.height;    
+  finishingLine.width=30
+  finishingLine.height=canvas.height
+  finishingLine.x=canvas.width*8
+  timeoutTime = canvas.width*60.78
+
+}
 
