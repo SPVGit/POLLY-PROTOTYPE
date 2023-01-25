@@ -37,7 +37,7 @@ Further modularization and optimization of OOP code. Creation of JSON file. Sett
 
 The front page heading and subheading font images were obtained from https://www.fontspace.com/sunny-spells-font-f68393
 The heading font image was bent at https://fontmeme.com/bend-images/
-All the img-div images were obtained from unsplash and cartoonized on https://www.fotor.com/features/photo-to-cartoon/
-All other images such as ticks,crosses and canvas game components were obtained from Clip Art Library and PNG tree
-Background music was from Pixabay.
+All the img-div images were obtained from unsplash and cartoonized on https://goart.fotor.com/
+All other images such as ticks,crosses and canvas game components were obtained from http://clipart-library.com/ and https://pngtree.com/
+Background music was from https://pixabay.com/.
 
