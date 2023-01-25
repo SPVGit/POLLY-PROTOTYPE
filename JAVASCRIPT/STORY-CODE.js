@@ -1,13 +1,14 @@
+// MAIN GAME LOGIC----------------------------------------------------------------------------------------------------------------
 
-// MAIN GAME LOGIC---------------------------------------------------------------------------------------------
-
-//LOCAL STORAGE------------------------------------------------------------------------------------------------
+//LOCAL STORAGE ON LOAD EVENT LISTENER--------------------------------------------------------------------------------------------
 
 window.addEventListener("load", (event) => {
 
+    myLoad() //Local storage execution
+
 });
 
-//DIVS, BUTTONS AND POINTS ARRAYS------------------------------------------------------------------------------
+//DIVS, BUTTONS AND POINTS ARRAYS-------------------------------------------------------------------------------------------------
 
 let pagesArray = []
 
@@ -15,51 +16,45 @@ let buttonsArray = [...document.getElementsByClassName('btn-style')]
 
 let pointsArray = [...document.getElementsByTagName('span')]
 
-//CREATING DIV OBJECTS------------------------------------------------------------------------------------------
+//CREATING DIV OBJECTS------------------------------------------------------------------------------------------------------------
 
 class Page {
+
     constructor(pageNumber){
+
         this.div = document.getElementById(`P-${pageNumber}`)
     }
+
 }
 
-for (let i = 1; i<19; i++){
+for (let i = 1; i<28; i++){
+
  pagesArray.push(new Page(i))
+
 }
 
 pagesArray.unshift(new Page("INTRO"))
 pagesArray.push(new Page(`5.11`))
+pagesArray.push(new Page(`9.11`))
 pagesArray.push(new Page (`WIN`))
 pagesArray.push(new Page (`LOSE`))
 pagesArray.push(new Page(`END`))
 
-//CREATING AUDIO OBJECTS---------------------------------------------------------------------------------------
+//AUDIO OBJECTS AND FUNCTIONS------------------------------------------------------------------------------------------------------
 
-let backgroundAudio = new Audio('PRICE-OF-FREEDOM.mp3')
-let bubbleSounds = new Audio("BUBBLE-SOUNDS.mp3")
+let backgroundAudio = new Audio('Z-PRICE-OF-FREEDOM.mp3')
+let bubbleSounds = new Audio("Z-BUBBLE-SOUNDS.mp3")
+let successSound = new Audio ("Z-SUCCESS.mp3")
+let pageTurn = new Audio ("Z-PAGE-TURN.mp3")
 
-//FUNCTIONS-----------------------------------------------------------------------------------------------------
 
-function openAndClosePage(btn,pg){
-
-    btn.parentNode.parentNode.style.display="none"
-    pg.div.style.display='flex'
-
-    console.log(btn.parentNode.parentNode);
-    console.log(pg.div);
-    
-    
-
-}
-
-function playAudio(audio,btn) {
+function playMainAudio(audio,btn) {
 
     if(btn.id==="P-1btn")
     audio.play();
     audio.volume = 0.2;
-   
-}
 
+}
 function stopAudio(audio){
 
     audio.pause();
@@ -67,33 +62,102 @@ function stopAudio(audio){
     audio.src = ""
     
 }
+function winAudio(audio, btn){
 
-function pointsCalculator(btn,pg){
+    if(btn.classList.contains("P-WIN")){
+        audio.play()
+        
+    }
 
-    if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(pg.div.id.substring(2,9))){
+}
+
+function turnPageAudio(audio, btn){
+
+    if(!btn.classList.contains("P-WIN")||!btn.classList.contains("P-LOSE")){
+        audio.play()
+        audio.volume=0.5;
+    }
+
+}
+
+//LOCAL STORAGE FUNCTIONS---------------------------------------------------------------------------------------------------------
+
+let setData = {}
+
+function mySave(dataObj) { //Local Storage get Item
+
+    let dataKey = (JSON.stringify(dataObj))
+    localStorage.setItem(`dataKey`, dataKey)  
+
+}
+
+function myLoad() { //Local Storage set Item
+
+    let storedObj = localStorage.getItem('dataKey')
+
+    if(storedObj && (JSON.parse(storedObj).pageId!==`P-INTRO`)){ //shows any open page apart from intro page
+        
+        document.getElementById(`${JSON.parse(storedObj).pageId}`).style.display='flex'
+        document.getElementById(`${JSON.parse(storedObj).pageId}`).onclick = function(){
+            backgroundAudio.play()
+            backgroundAudio.volume = 0.2;
+        }
+        if(JSON.parse(storedObj).btnPgId){
+            document.getElementById(`${JSON.parse(storedObj).btnPgId}`).style.display='none'
+        }
+        document.getElementById(`P-INTRO`).style.display='none'
+        pointsArray.forEach(span=>span.innerHTML=parseFloat(JSON.parse(storedObj).points))
+
+    }  
+
+     return storedObj
+
+}
+
+//MAIN GAME FUNCTIONALITY--------------------------------------------------------------------------------------------------------
+
+function openAndClosePage(btn,pg){
+
+    btn.parentNode.parentNode.style.display="none"
+    pg.div.style.display='flex'
+    setData.points=pointsArray[0].innerHTML
+    setData.btnPgId=btn.parentNode.parentNode.id
+    setData.pageId=pg.div.id
+    mySave(setData)   
+
+}
+
+function pointsCalculator(btn,page){
+
+    if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(page.id.substring(2,9))){
 
         pointsArray.forEach(span=>{
-            span.innerHTML=parseFloat(span.innerHTML)+5  
+            span.innerHTML=parseFloat(span.innerHTML)+5
+            setData.points=pointsArray[0].innerHTML
+            mySave(setData)  
         })
         
     }
 
-    else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(pg.div.id.substring(2,9))){
+    else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(page.id.substring(2,9))){
 
         pointsArray.forEach((span)=>{
         span.innerHTML=parseFloat(span.innerHTML)-10
-        winOrLose(span.innerHTML,pg.div)})
+        setData.points=pointsArray[0].innerHTML
+        mySave(setData)
+        loseLogic(span.innerHTML,page)})
     }
-        
+    
 }
 
-function winOrLose(score,page){
+function loseLogic(score,page){
 
     if(score<0){ 
         if(page.style.display==='flex'){
             page.style.display='none'
             pagesArray[pagesArray.length-2].div.style.display='flex'
-
+            setData.pageId=pagesArray[pagesArray.length-2].div.id
+            mySave(setData)
         }
     }   
 
@@ -105,6 +169,11 @@ function restart(btn){
 
         location.reload();
         pointsArray.forEach(span=>span.innerHTML=0)
+        setData.btnPgId=""
+        setData.pageId="P-INTRO"
+        setData.points=0 
+        mySave(setData)
+
         stopAudio(backgroundAudio)
     }
 }
@@ -118,8 +187,10 @@ function onGameStart(btnArr, pgsArr){
                 btn.onclick=function(){
 
                     openAndClosePage(btn,pg)
-                    pointsCalculator(btn,pg)
-                    playAudio(backgroundAudio,btn)
+                    playMainAudio(backgroundAudio,btn)
+                    turnPageAudio(pageTurn, btn)
+                    winAudio(successSound, btn)
+                    pointsCalculator(btn,pg.div)
                     restart(btn)                 
 
                 }                                       
@@ -132,41 +203,3 @@ function onGameStart(btnArr, pgsArr){
 onGameStart(buttonsArray,pagesArray)
 
 
-//LOCAL STORAGE FEATURE - TO BE COMPLETED LATER--------------------------------------------------------------------------------
-
-//setData.pageId=pg.div.id
-// setData.btnPgId=btn.parentNode.parentNode.id
-//setData.points=pointsArray[0].innerHTML // Stores pageId as P-INTRO and points as zero on restart
-//setData.canvasWidth = canvas.width
-//setData.canvasHeight = canvas.height
-// mySave(setData)
-   
-//setData{}
-
-//function mySave(dataObj) {
-
-    //let dataKey = (JSON.stringify(dataObj))
-    //localStorage.setItem(`dataKey`, dataKey)  
-
-//}
-
-// function myLoad() {
-
-//     let storedObj = localStorage.getItem('dataKey')
-
-//     if(storedObj && (JSON.parse(storedObj).pageId!==`P-INTRO`)){ //shows any open page apart from intro page
-//         document.getElementById(`${JSON.parse(storedObj).pageId}`).style.display='flex'
-//         document.getElementById(`${JSON.parse(storedObj).pageId}`).onclick = function(){
-//             backgroundAudio.play()
-//             backgroundAudio.volume = 0.2;
-//         }
-
-//        //document.getElementById(`${JSON.parse(storedObj).btnPgId}`).style.display='none'
-//         document.getElementById(`P-INTRO`).style.display='none'
-//         pointsArray.forEach(span=>span.innerHTML=parseFloat(JSON.parse(storedObj).points))
-
-//     }  
-
-//     return storedObj
-
-// }

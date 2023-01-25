@@ -101,6 +101,20 @@ class OneBtnDiv {
 
 //SUBCLASSES------------------------------------------------------------------------------------
 
+class NoBackOneBtnDiv extends OneBtnDiv{
+
+    constructor(prevPg,currentPg,nextPg,imgPath,list){
+        
+        super(prevPg,currentPg,nextPg,imgPath,list)
+
+        this.buttonDiv.removeChild(this.backBtn)
+
+    }
+    
+}
+
+//------------------------------------------------------------------------------------
+
 class IntroDiv extends OneBtnDiv{ 
 
     constructor(currentPg, nextPg, headerImg, subheaderImg,imgPath,list){
@@ -191,6 +205,21 @@ class TwoBtnDiv extends OneBtnDiv{
     }
 
 }
+
+//------------------------------------------------------------------------------------
+
+class NoBackTwoBtnDiv extends TwoBtnDiv{
+
+    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list){
+        
+        super(prevPg,currentPg,nextPg,secondPg,imgPath,list)
+
+        this.buttonDiv.removeChild(this.backBtn)
+
+    }
+    
+}
+
 
 //---------------------------------------------------------------------------------------
 
@@ -307,9 +336,9 @@ class QuizDiv extends OneBtnDiv{
 
 //---------------------------------------------------------------------------------------
 
-class CanvasDiv extends TwoBtnDiv {
+class CanvasDiv extends NoBackTwoBtnDiv {
 
-    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list, gameDivId, canvasId, cnvWinPara,cnvIntroPara, hidBtnBack, hidBtnForwardA, hidBtnForwardB){
+    constructor(prevPg,currentPg,nextPg,secondPg,imgPath,list, gameDivId, canvasId, cnvWinPara,cnvIntroPara, /*hidBtnBack,*/ hidBtnForwardA, hidBtnForwardB){
 
         super(prevPg,currentPg,nextPg,secondPg,imgPath,list,)
         
@@ -373,7 +402,6 @@ class CanvasDiv extends TwoBtnDiv {
         swimRestart.innerHTML='Swim'
         this.swimRestart=swimRestart
 
-        this.backBtn.setAttribute('id',`${hidBtnBack}`)//hiddenBtnP6Back
         this.forwardBtnA.setAttribute('id', `${hidBtnForwardA}`)//hiddenBtnP6A
         this.forwardBtnA.classList.add('hidden-btn')
         this.forwardBtnB.setAttribute('id',`${hidBtnForwardB}`)//hiddenBtnP6B
@@ -454,17 +482,7 @@ class EndDiv extends OneBtnDiv{//prevPg,currentPg,nextPg,imgPath,imgPath2,list
 
 }
 
-class NoBackOneBtnDiv extends OneBtnDiv{
 
-    constructor(prevPg,currentPg,nextPg,imgPath,list){
-        
-        super(prevPg,currentPg,nextPg,imgPath,list)
-
-        this.buttonDiv.removeChild(this.backBtn)
-
-    }
-    
-}
 
 //---------------------------------------------------------------------------------------
 
@@ -548,16 +566,13 @@ let P5 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
 
 )
 
-let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,gameDivId,canvasId,cnvWinPara,cnvIntroPara,hidBtnBack,hidBtnForwardA,hidBtnForwardB 
+let P6 = new CanvasDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list,gameDivId,canvasId,cnvWinPara,cnvIntroPara,hidBtnForwardA,hidBtnForwardB 
 
-    5,6,7,37,null,null,'P6gameDiv','my-canvas',
+    5,6,7,20,null,null,'P6gameDiv','my-canvas',
 
-    `YOU MADE IT!!! Do you still want Polly to go back the way she came?
-    Or A: continue on in search of her friends, or B: roam around aimlessly?`,
+    `YOU MADE IT!!! Do you want Polly to A: continue on in search of her friends, or B: roam around aimlessly?`,
 
     `Click 'Swim' and tap anywhere on the game window aside from the buttons to help Polly get past dangerous predators and activate the next stage of the adventure! You can click 'Swim' again to take Polly to the start. If you reach the finishing line you get lots of extra points. Otherwise, you get negative points and you lose the game.`,
-
-    "hiddenBtnP6Back",
 
     "hiddenBtnP6A",
     
@@ -600,7 +615,7 @@ let P8 = new QuizDiv( //prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpar
 
 let P9 = new TwoBtnDiv ( //prevPg,currentPg,nextPg,secondPg,imgPath,list
 
-    8,9,10,27,
+    8,9,10,19,
 
     './IMAGES/9.IMG.jpg',
 
@@ -620,8 +635,6 @@ let P10 = new LastPageDiv( //prevPg,currentPg,nextPg,imgPath,list
     `<li>It was time to finally take the plunge and swim out into the big and scary but beautiful world beyond...</li>`
 
 )
-
-
 
 let P11 = new TwoBtnDiv (//prevPg,currentPg,nextPg,secondPg,imgPath,list
 
@@ -714,20 +727,130 @@ let P17 = new LastPageDiv (//prevPg,currentPg,nextPg,imgPath,list
 
 let P18 = new OneBtnDiv(//prevPg,currentPg,nextPg,imgPath,list
 
-16,18,5.11,
+    16,18,5.11,
 
-'./IMAGES/18.IMG.jpg',
+    './IMAGES/18.IMG.jpg',
 
-`<li>Polly entered the cave and started to walk down a tunnel which inclined downwards.</li>
-<li>It carried on for a long while and she started to get worried. </li>
-<li>Luckily she came across a crack on the wall, just big enough for her to squeeze through.</li>
-<li>Should Polly head back, or A: be curious and check out whats on the other side of the crack</li>`
+    `<li>Polly entered the cave and started to walk down a tunnel which inclined downwards.</li>
+    <li>It carried on for a long while and she started to get worried. </li>
+    <li>Luckily she came across a crack on the wall, just big enough for her to squeeze through.</li>
+    <li>Should Polly head back, or A: be curious and check out whats on the other side of the crack</li>`
 
 )
 
-let P511 = new NoBackOneBtnDiv(//prevPg,currentPg,nextPg,imgPath,list
+let P19 = new LastPageDiv( //prevPg,currentPg,nextPg,imgPath,list
 
-null,5.11,6,
+    9, 19,'LOSE',
+
+    './IMAGES/19.IMG.jpg',
+
+    `<li>Oops! Wrong move, that's not really the way to go about it! You can't just abandon your friends again just when you've found them...</li>`
+
+)
+
+let P20 = new TwoBtnDiv(//prevPg,currentPg,nextPg,secondPg,imgPath,list
+
+    6,20,24,21,
+
+    './IMAGES/20.IMG.jpg',
+
+    `<li>The killer whales bobbed up and down in river eyeing Polly hungrily as she waddled as far awaw from them as possible.</li>
+    <li>Polly's random adventure was not futile. She soon came across something moving in the snow. Should Polly try to head back,  A: find out what it was, or B: continue to wander aimlessly? </li>`
+
+)
+
+let P21 = new TwoBtnDiv(//prevPg,currentPg,nextPg,secondPg,imgPath,list
+
+    20, 21, 22, 23,
+
+    './IMAGES/21.IMG.jpg',
+
+    `<li>Sometimes the best things in life are encountered when we least expect them.</li>
+    <li>Looks like Polly's curiousity paid off! A baby seal was rolling in the mud. Like Polly, he had been left behind by his parents and friends. He was super pleased to have found a new friend.</li>`
+
+)
+
+let P22 = new LastPageDiv(//prevPg,currentPg,nextPg,imgPath,list
+
+21,22,'WIN',
+
+'./IMAGES/22.IMG.png',
+
+`<li>Baby penguin and baby seal became best of friends.</li>
+<li>When they were finally ready, they swam out into the sea in search of wild new adventures.</li>`
+
+)
+
+let P23 = new LastPageDiv (//prevPg,currentPg,nextPg,imgPath,list
+
+21,23,'LOSE',
+
+'./IMAGES/23.IMG.jpg',
+
+`<li>Unfortunately, the sky started to get very dark.</li>
+<li>A blizzard came upon them. They tried to find a shelter but visibility was poor and they kept walking deeper into the icy desert without realising. Unfortunately, they lost each other and also got lost themselves, never to be seen again.</li>`
+
+)
+
+let P24 = new QuizDiv( //prevPg,currentPg,nextPg,imgPath,list,firstpara,secondpara,thirdpara, Qnum1,Qnum2,Qnum3, hidBtnForwardA,inp1Length, inp2Length, inp3Length
+
+20, 24, 25,
+
+null,
+
+"",
+
+'Killer Whales are not whales They are actually a type of:',
+
+'Another name for Killer Whale is:',
+
+'Killer Whales are a type of fish. True/False',
+
+7, 8, 9,
+
+"hiddenBtnP24A",
+
+7, 4, 5
+
+)
+
+let P25 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
+
+24, 25, 26,
+
+"./IMAGES/25.IMG.jpg",
+
+`<li>A screeching noise from behind made Polly whirl around</li>
+<li>All hope was not lost in the end. One of her friends had actually made the effort to come back and look for Polly. They both hugged and then started to make their way to the other penguins which were still quite a distance away</li>`
+
+)
+
+let P26 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
+
+25, 26, 27,
+
+"./IMAGES/23.IMG.jpg",
+
+`<li>A blizzard began, but fortunately there was a large ice rock nearby with a ledge where Polly and her friend could take shelter.</li>
+<li>They stayed there overnight, huddling together to keep warm. Eventually, the storm passed and the two penguins were on the move again</li>`
+
+)
+
+let P27 = new OneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
+
+26, 27, 9.11,
+
+"./IMAGES/27.IMG.jpg",
+
+`<li>It was steep climb down the rocky ledge.</li>
+<li>In distance they could see their friends waiting for them at the waters edge</li>`
+
+)
+
+
+let P511 = new NoBackOneBtnDiv( //prevPg,currentPg,nextPg,imgPath,list
+
+null, 5.11, 6,
 
 './IMAGES/5.IMG.jpg',
 
@@ -736,6 +859,19 @@ null,5.11,6,
 <li>Polly found an underground river flowing near by. You need to her to swim down the river </li>
 <li>Note, she is sure to encounter predators in the water.</li>`
 
+
+)
+
+let P911 = new NoBackOneBtnDiv(//prevPg,currentPg,nextPg,imgPath,list
+
+27, 9.11, 10,
+
+"./IMAGES/9.IMG.jpg",
+
+`<li>Unfortunately, Polly tripped and fell causing her to lose 10 points :( ...</li>
+<li>Luckily, she was still okay.</li>
+<li>At long last Polly was able to join her friends who screeched in joy at seeing their friend alive and well.</li>
+<li>Polly did not find any gold or diamond on her dangerous adventure but she found the greatest treasure of all: her friends.`
 
 )
 
@@ -766,12 +902,12 @@ let end = new EndDiv(//prevPg, currentPg,nextPg,imgPath,list
 
     null, 'END', null, 
 
-    './IMAGES/0.IMG-INTRO.jpg' , './IMAGES/0.IMG-INTRO.jpg','./IMAGES/0.IMG-INTRO.jpg',
+    './IMAGES/ZLADYBUG.jpg','./IMAGES/ZELEPHANT.jpg','./IMAGES/ZMONKEY.jpg' , 
     
-    `<li>Polly may have been lonely in her icy world, but she has many friends around the world in far off places</li>
-    <li>There's Mindy the Monkey in India, Spinkey the Spider in Australia and Elly the Elephant in Africa</li>
-    <li>Why not click on one of the links below to get to know these friends and go on wild adventures with them?</li>
-    <li>If you would like to play Polly the Penguin again, just click on 'Restart' :) ...</li>`
+    `<li>Thank you for playing! :) ...</li>
+    <li>Polly the Penguin may have had a rather lonely adventure on her very icy continent, but she does have many friends around the world in faaaaaaaar off places.</li>
+    <li>There's Mintu the Monkey who needs your help to hide a bunch of tasty bananas from other rogue monkeys. Elinah the Elephant who needs to travel a long distance to find her baby who was missing and Leila the Ladybug who needs to capture as many aphids as she can find on a lettuce farm.</li>
+    <li>Why not click on one of the links below to get to know these wonderful friends and go on wild adventures with them?</li>
+    <li>If you would like to play Polly the Penguin again and try one of the other icy routes, just click on the 'Restart' button. :) ... </li>`
 
 )
-

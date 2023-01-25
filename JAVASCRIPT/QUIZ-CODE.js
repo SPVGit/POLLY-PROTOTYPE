@@ -18,10 +18,12 @@ function quizPlay(quesNum,word,button){
             correctAns+=1
 
             if(correctAns===3){
+                successSound.play()
                 buttonToShow.classList.toggle('hidden-btn')
                 correctAns=0
             }  
             pointsArray.forEach(span=>span.innerHTML=parseFloat(span.innerHTML)+5)
+          
         }
         else{
             tickPic.style.display='none'
@@ -43,5 +45,7 @@ quizPlay(4,'CAMOUFLAGE','hiddenBtnP8A')
 quizPlay(5,'DOG','hiddenBtnP8A')
 quizPlay(6,'PACKS','hiddenBtnP8A')
     
-    
+quizPlay(7,'DOLPHIN','hiddenBtnP24A')
+quizPlay(8,'ORCA','hiddenBtnP24A')
+quizPlay(9,'FALSE','hiddenBtnP24A')   
 

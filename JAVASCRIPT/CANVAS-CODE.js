@@ -9,7 +9,6 @@ let startBtn = document.getElementById("start-button");
 let restartBtn=document.getElementById('restart-btn');
 let hiddenBtnA = document.getElementById("hiddenBtnP6A");
 let hiddenBtnB = document.getElementById("hiddenBtnP6B");
-let hiddenBtnBack = document.getElementById('hiddenBtnP6Back');
 let p6 = document.getElementById('P-6');
 let pLose = document.getElementById("P-LOSE");
 let p6gameDiv=document.getElementById('P6gameDiv');
@@ -320,8 +319,6 @@ function checkGameOver(){
 
         if(newBird.crashWith(finishingLine)){ //colliding against finishing line
                     
-            
-                    
             setTimeout(function(){
 
               stopGame();
@@ -339,18 +336,33 @@ function checkGameOver(){
 function updateScore(obstacle,score){
     
   if(obstacle==="side"||obstacle ==="obstacle"){
+
       pointsArray.forEach((span)=>{
         span.innerHTML=-5
+   
+        setTimeout(function(){             
 
-        setTimeout(function(){                        
-          winOrLose(span.innerHTML,p6)
+          loseLogic(span.innerHTML,p6)
+
+          setData.btnPgId=''
+          setData.pageId=pLose.id
+          setData.points=-5
+          mySave(setData)
+          
         },300);  
-
+        
+          setData.btnPgId=''
+          setData.pageId=pLose.id
+          setData.points=-5
+          mySave(setData)
       }); 
+ 
   }
 
   else if (obstacle==="finishingLine") {
+
     pointsArray.forEach(span=>span.innerHTML=score+20);
+
   };
 
 }; 
@@ -409,7 +421,6 @@ function duringCanvasGame(){
     canvasIntro.style.display="none";
     startBtn.style.display="none";
     restartBtn.style.display="flex";
-    hiddenBtnBack.style.display='none';
     
 };
 
@@ -419,7 +430,6 @@ function onWinCanvas(){
 
   hiddenBtnA.style.display='flex';
   hiddenBtnB.style.display='flex';
-  hiddenBtnBack.style.display='flex';
   canvas.style.display="none";
   canvasWin.style.display="flex";
   restartBtn.style.display="none";
@@ -446,7 +456,7 @@ window.onload = function() {
         },timeoutTime);
 
         startGame();
-       
+        
       };
 
       restartBtn.onclick=function(){
