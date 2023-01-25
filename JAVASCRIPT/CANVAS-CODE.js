@@ -179,7 +179,7 @@ obsSpeedY=-0.25;
 
 let topObstacleArr = [];
 let bottomObstacleArr=[];
-let timeoutTime = canvas.width*60.78
+let timeoutTime = canvas.width*60.78;
 
 function createObstaclesArray(){
 
@@ -360,9 +360,10 @@ function updateScore(obstacle,score){
   }
 
   else if (obstacle==="finishingLine") {
-
-    pointsArray.forEach(span=>span.innerHTML=score+20);
-
+    if(!swimPointsAwarded) {
+      pointsArray.forEach(span=>span.innerHTML=score+20);
+      swimPointsAwarded = true;
+    };
   };
 
 }; 
@@ -375,7 +376,7 @@ function keyOperation(){
       newBird.speedY-=canvas.height/400;
       bubbleSounds.play();
       bubbleSounds.volume = 0.2;
-    })
+    });
 
     document.onkeydown = function (e) {  //space bar function for larger screens
       if (e.keyCode == 32) {
@@ -439,6 +440,7 @@ function onWinCanvas(){
 
 //-----------------------------------------------------------------------------------------------------------------------
 let currentScore= 0;
+let swimPointsAwarded = false;
 
 window.onload = function() {
 
@@ -480,24 +482,24 @@ window.addEventListener("resize", canvasResize);
 
 function canvasResize(){
 
-  let w = document.documentElement.clientWidth
-  let h = document.documentElement.clientHeight
-  canvas.width = w*0.9
-  canvas.height=h*0.6
-  backgroundImg.width=canvas.width
-  backgroundImg.height=canvas.height
-  newBird.width=canvas.width/7
-  newBird.height=canvas.width/7
-  newBird.speedX=canvas.width/6750,
-  newBird.gravitySpeed=canvas.height/8000
+  let w = document.documentElement.clientWidth;
+  let h = document.documentElement.clientHeight;
+  canvas.width = w*0.9;
+  canvas.height=h*0.6;
+  backgroundImg.width=canvas.width;
+  backgroundImg.height=canvas.height;
+  newBird.width=canvas.width/7;
+  newBird.height=canvas.width/7;
+  newBird.speedX=canvas.width/6750;
+  newBird.gravitySpeed=canvas.height/8000;
   obsWidth = canvas.width/3;
   obsHeight = canvas.height/5;
   obsPosX=canvas.width;
   obsPosY=canvas.height;    
-  finishingLine.width=30
-  finishingLine.height=canvas.height
-  finishingLine.x=canvas.width*8
-  timeoutTime = canvas.width*60.78
+  finishingLine.width=30;
+  finishingLine.height=canvas.height;
+  finishingLine.x=canvas.width*8;
+  timeoutTime = canvas.width*60.78;
 
 }
 
