@@ -31,8 +31,7 @@ The code for button operation to open and close different pages are found under 
 
 ## NEXT STEPS:
 
-Further modularization and optimization of OOP code. Creation of JSON file. Setting up local storage.
-
+Further modularization and optimization of OOP code. Creation of JSON file. 
 ## RESOURCES:
 
 The front page heading and subheading font images were obtained from https://www.fontspace.com/sunny-spells-font-f68393
