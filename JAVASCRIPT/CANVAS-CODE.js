@@ -333,13 +333,14 @@ function checkGameOver(){
 function updateScore(obstacle,score){
     
   if(obstacle==="side"||obstacle ==="obstacle"){
+    if(!lostSwimGame){
 
-      pointsArray.forEach((span)=>{
-        span.innerHTML=-5
-   
-        setTimeout(function(){             
+      pointsArray.forEach(span=>span.innerHTML=-5);
+      lostSwimGame=true;
+      
+      setTimeout(function(){             
 
-          loseLogic(span.innerHTML,p6)
+          loseLogic(pointsArray[0].innerHTML,p6)
 
           setData.btnPgId=''
           setData.pageId=pLose.id
@@ -352,11 +353,8 @@ function updateScore(obstacle,score){
           setData.pageId=pLose.id
           setData.points=-5
           mySave(setData)
-
-      }); 
- 
+    }; 
   }
-
   else if (obstacle==="finishingLine") { 
 
     if(!swimPointsAwarded) {
@@ -454,6 +452,7 @@ function onWinCanvas(){
 
 let currentScore= 0;
 let swimPointsAwarded = false;
+let lostSwimGame = false;
 
 window.onload = function() {
 
