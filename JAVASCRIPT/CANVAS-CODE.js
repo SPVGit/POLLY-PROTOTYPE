@@ -376,7 +376,7 @@ function keyOperation(){
 
       newBird.speedY-=canvas.height/400;
       bubbleSounds.play();
-      bubbleSounds.volume = 0.2;
+      bubbleSounds.volume = 0.8;
 
     });
 
@@ -387,7 +387,7 @@ function keyOperation(){
           e.preventDefault();
           newBird.speedY-=canvas.height/400;
           bubbleSounds.play();
-          bubbleSounds.volume = 0.2;
+          bubbleSounds.volume = 0.8;
 
       };
 

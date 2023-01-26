@@ -52,7 +52,7 @@ function playMainAudio(audio,btn) {
 
     if(btn.id==="P-1btn");
     audio.play();
-    audio.volume = 0.8;
+    audio.volume = 0.5;
 
 };
 function stopAudio(audio){
@@ -76,7 +76,7 @@ function turnPageAudio(audio, btn){
     if(!btn.classList.contains("P-WIN")||!btn.classList.contains("P-LOSE")){
 
         audio.play();
-        audio.volume=0.8;
+        audio.volume=0.5;
 
     };
 
@@ -131,7 +131,8 @@ function openAndClosePage(btn,pg){
 
     if(pg.div.id==="P-LOSE" && pg.div.style.display==='flex'){
 
-        loseSound.play()
+        loseSound.play();
+        loseSound.volume = 0.8;
 
     }
 
@@ -183,7 +184,8 @@ function loseLogic(score,page){
             page.style.display='none';
             pagesArray[pagesArray.length-2].div.style.display='flex';
 
-            loseSound.play()
+            loseSound.play();
+            loseSound.volume = 0.8;
 
             setData.pageId=pagesArray[pagesArray.length-2].div.id;
             mySave(setData);
