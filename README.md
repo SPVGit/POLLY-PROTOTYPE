@@ -1,6 +1,10 @@
 
 # POLLY-PROTOTYPE - WEB DEV GAME PROJECT BY SUBARNA PAUL VIGNARAJAH
 
+## LINK TO GAME
+
+https://spvgit.github.io/POLLY-PROTOTYPE/
+
 ## GAME DEVICE AVAILABILITY
 
 This game has been developed to be available on mobile and tablet devices only. The two divs on HTML are designed to alert the player about this as well as to rotate their mobile/tablet to portrait mode.
