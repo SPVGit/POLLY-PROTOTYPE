@@ -6,12 +6,12 @@
 let canvasIntro = document.getElementById('canvas-intro');
 let canvasWin = document.getElementById('canvas-win');
 let startBtn = document.getElementById("start-button");
-let restartBtn=document.getElementById('restart-btn');
+let restartBtn = document.getElementById('restart-btn');
 let hiddenBtnA = document.getElementById("hiddenBtnP6A");
 let hiddenBtnB = document.getElementById("hiddenBtnP6B");
 let p6 = document.getElementById('P-6');
 let pLose = document.getElementById("P-LOSE");
-let p6gameDiv=document.getElementById('P6gameDiv');
+let p6gameDiv = document.getElementById('P6gameDiv');
 let canvas = document.getElementById('my-canvas');
 let ctx = canvas.getContext('2d');
 
@@ -285,9 +285,6 @@ function stopGame(){
 
 };  
 
-
-
-
 //-----------------------------------------------------------------------------------------------------------------------
 
 function checkGameOver(){ 
@@ -355,14 +352,19 @@ function updateScore(obstacle,score){
           setData.pageId=pLose.id
           setData.points=-5
           mySave(setData)
+
       }); 
  
   }
 
-  else if (obstacle==="finishingLine") {
+  else if (obstacle==="finishingLine") { 
+
     if(!swimPointsAwarded) {
+
       pointsArray.forEach(span=>span.innerHTML=score+20);
       swimPointsAwarded = true;
+      successSound.play()
+
     };
   };
 
@@ -373,18 +375,24 @@ function updateScore(obstacle,score){
 function keyOperation(){ 
 
     p6gameDiv.onclick=(()=>{ //for tapping on mobile screen
+
       newBird.speedY-=canvas.height/400;
       bubbleSounds.play();
       bubbleSounds.volume = 0.2;
+
     });
 
     document.onkeydown = function (e) {  //space bar function for larger screens
+
       if (e.keyCode == 32) {
-        e.preventDefault();
+
+          e.preventDefault();
           newBird.speedY-=canvas.height/400;
           bubbleSounds.play();
           bubbleSounds.volume = 0.2;
+
       };
+
     };
 
 };
@@ -394,9 +402,13 @@ function disableKeys(){
   p6gameDiv.onclick=null;  //tapping diabled for mobiles
 
   document.onkeydown = function (e) {  //space bar diabled for larger screens
+
     if (e.keyCode == 32) {
+
        return false
+
     };
+
   };
 
 };
@@ -439,6 +451,7 @@ function onWinCanvas(){
 };
 
 //-----------------------------------------------------------------------------------------------------------------------
+
 let currentScore= 0;
 let swimPointsAwarded = false;
 

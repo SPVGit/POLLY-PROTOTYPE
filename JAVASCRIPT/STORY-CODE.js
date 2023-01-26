@@ -46,7 +46,7 @@ let backgroundAudio = new Audio('Z-PRICE-OF-FREEDOM.mp3');
 let bubbleSounds = new Audio("Z-BUBBLE-SOUNDS.mp3");
 let successSound = new Audio ("Z-SUCCESS.mp3");
 let pageTurn = new Audio ("Z-PAGE-TURN.mp3");
-
+let loseSound = new Audio("Z-LOSE.mp3")
 
 function playMainAudio(audio,btn) {
 
@@ -74,8 +74,10 @@ function winAudio(audio, btn){
 function turnPageAudio(audio, btn){
 
     if(!btn.classList.contains("P-WIN")||!btn.classList.contains("P-LOSE")){
+
         audio.play();
         audio.volume=0.5;
+
     };
 
 };
@@ -126,6 +128,13 @@ function openAndClosePage(btn,pg){
 
     btn.parentNode.parentNode.style.display="none";
     pg.div.style.display='flex';
+
+    if(pg.div.id==="P-LOSE" && pg.div.style.display==='flex'){
+
+        loseSound.play()
+
+    }
+
     setData.points=pointsArray[0].innerHTML;
     setData.btnPgId=btn.parentNode.parentNode.id;
     setData.pageId=pg.div.id;
@@ -138,9 +147,12 @@ function pointsCalculator(btn,page){
     if (parseFloat(btn.parentNode.parentNode.id.substring(2,9))<parseFloat(page.id.substring(2,9))){ 
         
         pointsArray.forEach(span=>{
+
             span.innerHTML=parseFloat(span.innerHTML)+5;
+
             setData.points=pointsArray[0].innerHTML;
             mySave(setData);  
+
         })
        
     }
@@ -148,10 +160,16 @@ function pointsCalculator(btn,page){
     else if(parseFloat(btn.parentNode.parentNode.id.substring(2,9))>parseFloat(page.id.substring(2,9))){
         
         pointsArray.forEach((span)=>{
+
         span.innerHTML=parseFloat(span.innerHTML)-10;
+
         setData.points=pointsArray[0].innerHTML;
         mySave(setData);
-        loseLogic(span.innerHTML,page)});
+
+        loseLogic(span.innerHTML,page)
+        
+        });
+
     }
     
 }
@@ -159,11 +177,17 @@ function pointsCalculator(btn,page){
 function loseLogic(score,page){
 
     if(score<0){ 
+
         if(page.style.display==='flex'){
+
             page.style.display='none';
             pagesArray[pagesArray.length-2].div.style.display='flex';
+
+            loseSound.play()
+
             setData.pageId=pagesArray[pagesArray.length-2].div.id;
             mySave(setData);
+
         }
     }   
 

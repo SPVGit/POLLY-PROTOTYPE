@@ -8,7 +8,7 @@ This game has been developed to be available on mobile and tablet devices only. 
 ## GAME PREMISE
 
 This is an interactive choose your own adventure story prototype which is an MVP with the intention of expansion in future.
-The aim of the game is help Polly the penguin find a lost treasure. If she finds the treasure and / or ends with positive points, she wins the game. Negative points makes you lose the game.
+The aim of the game is help Polly the Penguin find a lost treasure. If she finds the treasure and ends with positive points, she wins the game. Negative points or not finding the treasure makes you lose the game.
 
 The game involves reading the story and deciding which route Polly should take at the end of each page.
 Moving forward earns one points, moving back makes one lose double points so making it harder to move back as one has to decide whether to sacrifice some points to move back and choose a different route. 
@@ -19,11 +19,9 @@ forced to move back and lose points, or instantly lose the game with negative po
 
 ## GAME STRUCTURE:
 
-The main game has been created in a modular fashion using OOP, which dynamically creates each div / page using DOM, so there
-are no game divs in HTML. OOP has been used to create various pages, e.g. pages with one, two (or more in future versions) forward buttons as well as a back button. Some pages only activate forward buttons on completion of a quiz or canvas game. There is also a win / lose page which does not allow the back feature but instead has an end button which leads to a page which has placeholders for links to other games. All pages have a restart button to reload game, apart from the first page which has a start button. 
+The main game has been created in a modular fashion using OOP in Javascript, which dynamically creates each div / page using DOM, so there are no 'game' divs in HTML. Styling of the divs was carried out by CSS. OOP has been used to create various pages, e.g. pages with one, two (or more in future versions) forward buttons as well as a back button. See ./JAVASCRIPT/OOP-CODE.js. Some pages only activate forward buttons on completion of a quiz or canvas game. There is also a win / lose page which does not allow the back feature but instead has an end button which leads to a page with placeholders for links to other games. All pages have a restart button to reload game, apart from the first page which has a start button. 
 
-To create the different pages of the game, information such as the previous page, current page and forward page numbers as well as the story text are inserted into the various OOP super and subclasses. These are all found under ./JAVASCRIPT/OOP-DATA.js.
-The idea is that the code will be reusable in future to create new stories by simply feeding in page numbers and story text wihtout needing to create new code. 
+To create the different pages of the game, information such as the previous page, current page and forward page numbers as well as the story text are inserted into the various OOP super and subclasses. The data for these are all found under ./JAVASCRIPT/OOP-DATA.js. The idea is that the code will be reusable in future to create new stories by simply feeding in page numbers and story text without needing to create new code. 
 
 Local storage also ensures, the present div / page can be restored if the window accidentally gets refreshed or closed.
 
@@ -33,7 +31,11 @@ The code for button operation to open and close different pages are found under 
 
 ## NEXT STEPS:
 
-Further modularization and optimization of OOP code. Creation of JSON file. 
+- Ironing out any unseen issues
+
+- Further modularization and optimization of OOP code, e.g., creating superclasses, subclasses and methods to control the functionality of various buttons, images and texts. 
+
+- Creation of a JSON file. 
 
 ## RESOURCES:
 
