@@ -52,7 +52,7 @@ function playMainAudio(audio,btn) {
 
     if(btn.id==="P-1btn");
     audio.play();
-    audio.volume = 0.2;
+    audio.volume = 0.8;
 
 };
 function stopAudio(audio){
@@ -76,7 +76,7 @@ function turnPageAudio(audio, btn){
     if(!btn.classList.contains("P-WIN")||!btn.classList.contains("P-LOSE")){
 
         audio.play();
-        audio.volume=0.5;
+        audio.volume=0.8;
 
     };
 
